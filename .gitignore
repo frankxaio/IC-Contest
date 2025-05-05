@@ -1,12 +1,12 @@
 # --------------------------------------
 # Design Compiler synthesis outputs
 # --------------------------------------
-*.ddc
-*.sdf
-*.qor
-*_syn.v
-*_syn.*
-*.sdc
+# *.ddc
+# *.sdf
+# *.qor
+# *_syn.v
+# *_syn.*
+# *.sdc
 
 # --------------------------------------
 # Verilog simulation artifacts
