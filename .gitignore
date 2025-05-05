@@ -1,0 +1,487 @@
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
+
+# Design Compiler synthesis outputs
+*.ddc
+*.sdf
+*.qor
+*_syn.v
+*_syn.*
+*.sdc
+
+# Verilog simulation artifacts
+*.fsdb
+*.vcd
+*.key
+*.log
+*.rc
+*.conf
+*.cmd
+*.bak
+
+# VCS simulation outputs
+simv
+simv.daidir/
+csrc/
+ucli.key
+vcs_gate.log
+vcs_rtl.log
+novas.*
+nWaveLog/
+verdiLog/
+verdi_config_file
+verdi.cmd*
+
+# Verdi session autosaves
+*.ses
+*.ses.*
+*.wave.*
+
+# Common backup/temp files
+*.swp
+*.tmp
+*~
+*.bak
+*.o
+*.so
+*.a
+*.out
+
+# Object and dependency files
+objs/
+*.d
+*.dmp
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Excluded notes/drawings (optional)
+*.excalidraw
