@@ -488,3 +488,4 @@ __pycache__/
 
 # VS code setup
 .vscode/
+tasks.json
