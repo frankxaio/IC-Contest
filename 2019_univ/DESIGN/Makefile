@@ -40,6 +40,7 @@ rtl:
 gate:
 	vcs \
 	-R \
+	-q \
 	-kdb \
 	+neg_tchk \
 	-negdelay \
@@ -53,11 +54,11 @@ gate:
 
 # verdi
 vd:
-	verdi -ssf *.fsdb &
+	verdi -q -ssf *.fsdb &
 
 # synthesis
 syn:
-	dc_shell -f  ./DC_syn.tcl | tee $$ROOT_PATH/syn/run_dc.txt
+	dc_shell -f  ./DC_syn.tcl | tee run_dc.log
 
 # lint
 lt:
@@ -67,4 +68,5 @@ lt:
 
 
 clean:
-	rm -rf *.log ucli.key csrc simv.daidir verdiLog inter.fsdb verdi_config_file
+	rm -rf *.log ucli.key csrc simv.daidir verdiLog inter.fsdb verdi_config_file default.svf \
+	unknownSignals.txt simv nWaveLog

@@ -98,11 +98,11 @@ module CONV (
       row <= 0;
       col <= 0;
     end else if (cs == ST_WR_MEM_L0) begin
-      col <= col + 1;
-      row <= (col == 63) ? row + 1 : row;
+      col <= col + 1'd1;
+      row <= (col == 63) ? row + 1'd1 : row;
     end else if (cs == ST_WR_MEM_L1) begin
-      col <= col + 2;
-      row <= (col == 62) ? row + 2 : row;
+      col <= col + 2'd2;
+      row <= (col == 62) ? row + 2'd2 : row;
     end
   end
 
@@ -111,20 +111,20 @@ module CONV (
   // ===========================================
   // addr = row * 63 + col == {row, col}
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) iaddr <= 0;
-    else if (ns == ST_CONV) begin
+  always_ff @(posedge clk) begin
+    if (ns == ST_CONV) begin
       unique case (ST_CONV_cnt)
         // Directly using {row-1, col-1}... will cause an error
-        4'd0: iaddr[11:0] <= {row[5:0] - 1'b1, col[5:0] - 1'b1};
-        4'd1: iaddr[11:0] <= {row[5:0] - 1'b1, col[5:0]};
-        4'd2: iaddr[11:0] <= {row[5:0] - 1'b1, col[5:0] + 1'b1};
-        4'd3: iaddr[11:0] <= {row[5:0], col[5:0] - 1'b1};
-        4'd4: iaddr[11:0] <= {row[5:0], col[5:0]};
-        4'd5: iaddr[11:0] <= {row[5:0], col[5:0] + 1'b1};
-        4'd6: iaddr[11:0] <= {row[5:0] + 1'b1, col[5:0] - 1'b1};
-        4'd7: iaddr[11:0] <= {row[5:0] + 1'b1, col[5:0]};
-        4'd8: iaddr[11:0] <= {row[5:0] + 1'b1, col[5:0] + 1'b1};
+        4'd0:    iaddr[11:0] <= {row[5:0] - 1'b1, col[5:0] - 1'b1};
+        4'd1:    iaddr[11:0] <= {row[5:0] - 1'b1, col[5:0]};
+        4'd2:    iaddr[11:0] <= {row[5:0] - 1'b1, col[5:0] + 1'b1};
+        4'd3:    iaddr[11:0] <= {row[5:0], col[5:0] - 1'b1};
+        4'd4:    iaddr[11:0] <= {row[5:0], col[5:0]};
+        4'd5:    iaddr[11:0] <= {row[5:0], col[5:0] + 1'b1};
+        4'd6:    iaddr[11:0] <= {row[5:0] + 1'b1, col[5:0] - 1'b1};
+        4'd7:    iaddr[11:0] <= {row[5:0] + 1'b1, col[5:0]};
+        4'd8:    iaddr[11:0] <= {row[5:0] + 1'b1, col[5:0] + 1'b1};
+        default: iaddr[11:0] <= iaddr[11:0];
       endcase
     end
   end
@@ -141,19 +141,20 @@ module CONV (
   // ===========================================
   // Convolution Calculation
   // ===========================================
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) idata_r <= '0;
-    else if (cs == ST_CONV) begin
+  // zero-padding selection
+  always_ff @(posedge clk) begin
+    if (cs == ST_CONV) begin
       unique case (ST_CONV_cnt_r)
-        4'd0: idata_r <= (row == 0 || col == 0) ? 0 : idata;
-        4'd1: idata_r <= (row == 0) ? 0 : idata;
-        4'd2: idata_r <= (row == 0 || col == 63) ? 0 : idata;
-        4'd3: idata_r <= (col == 0) ? 0 : idata;
-        4'd4: idata_r <= idata;
-        4'd5: idata_r <= (col == 63) ? 0 : idata;
-        4'd6: idata_r <= (row == 63 || col == 0) ? 0 : idata;
-        4'd7: idata_r <= (row == 63) ? 0 : idata;
-        4'd8: idata_r <= (row == 63 || col == 63) ? 0 : idata;
+        4'd0:    idata_r <= (row == 0 || col == 0) ? 0 : idata;
+        4'd1:    idata_r <= (row == 0) ? 0 : idata;
+        4'd2:    idata_r <= (row == 0 || col == 63) ? 0 : idata;
+        4'd3:    idata_r <= (col == 0) ? 0 : idata;
+        4'd4:    idata_r <= idata;
+        4'd5:    idata_r <= (col == 63) ? 0 : idata;
+        4'd6:    idata_r <= (row == 63 || col == 0) ? 0 : idata;
+        4'd7:    idata_r <= (row == 63) ? 0 : idata;
+        4'd8:    idata_r <= (row == 63 || col == 63) ? 0 : idata;
+        default: idata_r <= idata_r;
       endcase
     end
   end
@@ -191,8 +192,7 @@ module CONV (
     if (cs == ST_CONV)
       if (ST_CONV_cnt_r == 0) conv_mac <= '0;
       else if (ST_CONV_cnt_r == 4'd10) conv_mac <= conv_mac + BIAS;
-      else
-        conv_mac <= conv_mac + conv_mul;
+      else conv_mac <= conv_mac + conv_mul;
   end
 
 
@@ -212,9 +212,8 @@ module CONV (
   //        cwr,       write enable
   // [11:0] caddr_wr,  write address of data
   // [19:0] cdata_wr,  write data
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) cwr <= 0;
-    else if (ns == ST_WR_MEM_L0) cwr <= 1;
+  always_ff @(posedge clk) begin
+    if (ns == ST_WR_MEM_L0) cwr <= 1;
     else if (ns == ST_WR_MEM_L1) cwr <= 1;
     else cwr <= 0;
   end
@@ -255,20 +254,19 @@ module CONV (
     ST_MAXPOOL_cnt_r <= ST_MAXPOOL_cnt;
   end
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) crd <= 0;
-    else if (ns == ST_MAXPOOL) crd <= 1;
+  always_ff @(posedge clk) begin
+    if (ns == ST_MAXPOOL) crd <= 1;
     else crd <= 0;
   end
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) caddr_rd <= 0;
-    else if (ns == ST_MAXPOOL) begin
+  always_ff @(posedge clk) begin
+    if (ns == ST_MAXPOOL) begin
       unique case (ST_MAXPOOL_cnt)
-        2'd0: caddr_rd <= {row, col};
-        2'd1: caddr_rd <= {row, col + 1'b1};
-        2'd2: caddr_rd <= {row + 1'b1, col};
-        2'd3: caddr_rd <= {row + 1'b1, col + 1'b1};
+        2'd0:    caddr_rd <= {row, col};
+        2'd1:    caddr_rd <= {row, col + 1'b1};
+        2'd2:    caddr_rd <= {row + 1'b1, col};
+        2'd3:    caddr_rd <= {row + 1'b1, col + 1'b1};
+        default: caddr_rd <= caddr_rd;
       endcase
     end
   end
@@ -276,18 +274,17 @@ module CONV (
   // ===========================================
   // MAXPOOL
   // ===========================================
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) maxpool_res <= 0;
-    else if (cs == ST_MAXPOOL) begin
+  always_ff @(posedge clk) begin
+    if (cs == ST_MAXPOOL) begin
       unique case (ST_MAXPOOL_cnt_r)
-        2'd0: maxpool_res <= cdata_rd;
-        2'd1: maxpool_res <= (cdata_rd > maxpool_res) ? cdata_rd : maxpool_res;
-        2'd2: maxpool_res <= (cdata_rd > maxpool_res) ? cdata_rd : maxpool_res;
-        2'd3: maxpool_res <= (cdata_rd > maxpool_res) ? cdata_rd : maxpool_res;
+        2'd0:    maxpool_res <= cdata_rd;
+        2'd1:    maxpool_res <= (cdata_rd > maxpool_res) ? cdata_rd : maxpool_res;
+        2'd2:    maxpool_res <= (cdata_rd > maxpool_res) ? cdata_rd : maxpool_res;
+        2'd3:    maxpool_res <= (cdata_rd > maxpool_res) ? cdata_rd : maxpool_res;
+        default: maxpool_res <= maxpool_res;
       endcase
     end
   end
-
 
 
   // ===========================================
