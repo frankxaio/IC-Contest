@@ -484,4 +484,7 @@ __pycache__/
 *.pyo
 
 # Excluded notes/drawings (optional)
-*.excalidraw
+# *.excalidraw
+
+# VS code setup
+.vscode
