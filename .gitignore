@@ -33,6 +33,8 @@ nWaveLog/
 verdiLog/
 verdi_config_file
 verdi.cmd*
+unknownSignals.*
+*.svf
 
 # --------------------------------------
 # Verdi session autosaves
