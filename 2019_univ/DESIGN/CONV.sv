@@ -246,9 +246,8 @@ module CONV (
   // output logic [11:0] caddr_rd,   read address of data
   // input        [19:0] cdata_rd,   read caddr_rd of data
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) ST_MAXPOOL_cnt <= 0;
-    else if (ns == ST_MAXPOOL) ST_MAXPOOL_cnt <= ST_MAXPOOL_cnt + 1;
+  always_ff @(posedge clk) begin
+    if (ns == ST_MAXPOOL) ST_MAXPOOL_cnt <= ST_MAXPOOL_cnt + 1;
     else ST_MAXPOOL_cnt <= 0;
   end
 
