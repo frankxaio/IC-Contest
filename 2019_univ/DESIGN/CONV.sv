@@ -49,27 +49,34 @@ module CONV (
   logic signed [39:0] BIAS;
   assign BIAS = 40'h00_1310_0000;
 
-  // ===========================================
-  // Internal Signal
-  // ===========================================
-  // Image size is 64 x 64
-  // $clog2(64) = 6, => [$clog2(64)-1:0] = [5:0]
-  // logic [$clog2(64)-1:0] row, col;  // coordinate
-  logic [5:0] row, col;  // coordinate
+  //========================================
+  // Internal Signals
+  //========================================
 
-  // input signal 1 tap
-  logic signed [19:0] idata_r;
+  // Coordinates for a 64x64 image
+  logic [5:0] row, col;  //* tracks current row and column indices
 
-  // Convolution calculation
-  // double the width of multiplication operation
-  logic signed [39:0] conv_mul, conv_mac;
-  logic [19:0] conv_res;
-  logic [3:0] ST_CONV_cnt, ST_CONV_cnt_r;
-  logic signed [19:0] kernel_wire;
+  // Captured input signal for convolution
+  logic signed [19:0] idata_r;  //* holds one tap of input data
 
+  // Convolution operations
+  logic signed [39:0] conv_mul;  //* multiplication result (double width)
+  logic signed [39:0] conv_mac;  //* accumulate multiplication results + bias
+  logic        [19:0] conv_res;  //* final 20-bit convolution output
 
-  logic [2:0] ST_MAXPOOL_cnt, ST_MAXPOOL_cnt_r;
-  logic [19:0] maxpool_res;
+  // Convolution state counters
+  logic        [ 3:0] ST_CONV_cnt;  //* main convolution counter
+  logic        [ 3:0] ST_CONV_cnt_r;  //* registered version of convolution counter
+
+  // Holds the kernel data for current convolution tap
+  logic signed [19:0] kernel_wire;  //* selected kernel coefficient
+
+  // Max-pool state counters
+  logic        [ 2:0] ST_MAXPOOL_cnt;  //* main max-pool counter
+  logic        [ 2:0] ST_MAXPOOL_cnt_r;  //* registered version of max-pool counter
+
+  // Final output from max-pool
+  logic        [19:0] maxpool_res;  //* 20-bit maximum pooled result
 
 
   // ===========================================
@@ -199,10 +206,11 @@ module CONV (
   // ===========================================
   // csel
   // ===========================================
-  always_ff @(posedge clk) begin
-    if (ns == ST_WR_MEM_L0) csel <= 3'b001;  // write MEM_L0
-    else if (ns == ST_MAXPOOL) csel <= 3'b001;  // read MEM_L0
-    else if (ns == ST_WR_MEM_L1) csel <= 3'b011;  // write MEM_L1
+  always_comb begin
+    if (cs == ST_WR_MEM_L0) csel = 3'b001;  // write MEM_L0
+    else if (cs == ST_MAXPOOL) csel = 3'b001;  // read MEM_L0
+    else if (cs == ST_WR_MEM_L1) csel = 3'b011;  // write MEM_L1
+    else csel = 0;
   end
 
 
@@ -220,8 +228,10 @@ module CONV (
 
   always_ff @(posedge clk) begin
     if (ns == ST_WR_MEM_L0) caddr_wr <= {row, col};
-    else if (ns == ST_WR_MEM_L1) caddr_wr <= {2'b00, {row[5:1], col[5:1]}};  // work
+    else if (ns == ST_WR_MEM_L1) caddr_wr <= {2'b00, {row[5:1], col[5:1]}};
+    // row/2 and col/2 is address of maxpool processing
   end
+
 
 
   // conv_mac is 40 bits, 0-31 bits are fraction, 32-39 bits are integer
@@ -234,7 +244,6 @@ module CONV (
   always_comb begin
     if (cs == ST_WR_MEM_L0) cdata_wr = conv_mac[39] ? 0 : conv_res;
     else if (cs == ST_WR_MEM_L1) cdata_wr = maxpool_res;
-    else cdata_wr = 'h0;
   end
 
 
