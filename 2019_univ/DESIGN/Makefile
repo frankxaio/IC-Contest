@@ -69,4 +69,4 @@ lt:
 
 clean:
 	rm -rf *.log ucli.key csrc simv.daidir verdiLog inter.fsdb verdi_config_file default.svf \
-	unknownSignals.txt simv nWaveLog
+	unknownSignals.txt simv nWaveLog alib-52 *.fsdb
