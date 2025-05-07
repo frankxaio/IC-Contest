@@ -3,7 +3,7 @@
 Report : qor
 Design : CONV
 Version: T-2022.03-SP2
-Date   : Tue May  6 23:30:06 2025
+Date   : Tue May  6 23:47:19 2025
 ****************************************
 
 
@@ -65,10 +65,10 @@ Date   : Tue May  6 23:30:06 2025
   -----------------------------------------
   Resource Sharing:                    0.06
   Logic Optimization:                  0.03
-  Mapping Optimization:                0.41
+  Mapping Optimization:                0.40
   -----------------------------------------
-  Overall Compile Time:                1.57
-  Overall Compile Wall Clock Time:     1.79
+  Overall Compile Time:                1.54
+  Overall Compile Wall Clock Time:     1.76
 
   --------------------------------------------------------------------
 
