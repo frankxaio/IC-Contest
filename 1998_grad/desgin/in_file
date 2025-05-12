@@ -1,6 +1,0 @@
-        calc_mode estimate;      
-        library_name cb60hp231d;
-        process typical;
-        temperature 25;
-        voltage 5.0;
-        num_sites 1000;

@@ -1,9 +1,0 @@
-README		: this file
-
-cell_spec.pdf	: problem description document file
-report.000	: check list file
-
-test_bench.v	: Verilog test bench file
-EXPECT.DAT	: expected output data
-INPUT.DAT	: input data sequence
-in_file		: simulation input control file
