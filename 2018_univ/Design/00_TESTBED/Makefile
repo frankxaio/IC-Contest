@@ -3,7 +3,7 @@
 ######################################
 # Set your desired file names
 ######################################
-top_design=POSTFIX
+top_design=LCD_CTRL
 source_rtl_file="$(ROOT_PATH)/00_TESTBED/rtl_sim.f"	# Name of your source file
 source_gate_file="$(ROOT_PATH)/00_TESTBED/gate_sim.f"	# Name of your source file
 source_post_file="$(ROOT_PATH)/00_TESTBED/post_sim.f"
@@ -49,7 +49,7 @@ RTL = vcs ${TIMESCALE} \
     -l ${log_file} \
     -P ${VERDI_HOME}/share/PLI/VCS/linux64/novas.tab \
        ${VERDI_HOME}/share/PLI/VCS/linux64/pli.a \
-    +define+RTL \
+    +define+RTL+tb1 \
     +notimingchecks
 
 
@@ -68,7 +68,7 @@ GATE = vcs ${TIMESCALE} \
     -l ${log_file} \
     -P ${VERDI_HOME}/share/PLI/VCS/linux64/novas.tab \
        ${VERDI_HOME}/share/PLI/VCS/linux64/pli.a \
-	-v ${U18_SIM} \
+	-v ${ICC013_SIM} \
     +define+GATE \
 	+neg_tchk \
     -negdelay \
