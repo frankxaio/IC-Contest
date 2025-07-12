@@ -42,9 +42,13 @@ link
 # SECTION (D) Set Design Constraints
 #======================================================
 
+source -echo -verbose LCD_CTRL.sdc
+
 #======================================================
 # SECTION - (E) Optimization
 #======================================================
+compile -map_effort high -area_effort high
+compile -map_effort high -area_effort high -inc
 
 
 #======================================================
