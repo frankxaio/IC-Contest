@@ -1,25 +1,26 @@
+
 `timescale 1ns / 10ps
-`define CYCLE 10.0         	        // Modify your clock period here
+`define CYCLE 10.0 //Modify your clock period here
 
 
-`define SDFFILE "../02_SYN/Netlist/LCD_CTRL_syn.sdf"	// Modify your sdf file name
+`define SDFFILE "../02_SYN/Netlist/LCD_CTRL_syn.sdf" // Modify your sdf file name
 
 `ifdef tb1
-`define EXPECT "./tb1_goal.dat"
-`define CMD "./cmd1.dat"
-`define IMAGE "image1.dat"
+`define EXPECT "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/tb1_goal.dat"
+`define CMD "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/cmd1.dat"
+`define IMAGE "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/image1.dat"
 `endif
 
 `ifdef tb2
-`define EXPECT "./tb2_goal.dat"
-`define CMD "./cmd2.dat"
-`define IMAGE "image2.dat"
+`define EXPECT "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/tb2_goal.dat"
+`define CMD "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/cmd2.dat"
+`define IMAGE "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/image2.dat"
 `endif
 
 `ifdef tb3
-`define EXPECT "./tb3_goal.dat"
-`define CMD "./cmd3.dat"
-`define IMAGE "image3.dat"
+`define EXPECT "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/tb3_goal.dat"
+`define CMD "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/cmd3.dat"
+`define IMAGE "/home/host/Documents/IC-Contest/2018_univ/Design/00_TESTBED/dat/image3.dat"
 `endif
 
 
@@ -119,7 +120,10 @@ module test;
   initial begin
     @(negedge clk) reset = 1'b1;
     #t_reset reset = 1'b0;
+  end
 
+  initial begin
+    #100000 $finish;
   end
 
 
@@ -219,7 +223,15 @@ module IRAM (
     for (i = 0; i <= 63; i = i + 1) IRAM_M[i] = 0;
   end
 
-  always @(negedge clk) if (IRAM_valid) IRAM_M[IRAM_addr] <= IRAM_data;
+  always @(negedge clk) begin
+    if (IRAM_valid) begin
+      IRAM_M[IRAM_addr] <= IRAM_data;
+
+      // display
+      // $display("Current time: %0t", $time);
+      // #1;
+      // $display("IRAM_M[%0d] = %0h", IRAM_addr, IRAM_M[IRAM_addr]);
+    end
+  end
 
 endmodule
-

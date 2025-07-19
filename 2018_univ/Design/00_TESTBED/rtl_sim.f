@@ -1,2 +1,2 @@
-$ROOT_PATH/00_TESTBED/testfixture.v
+$ROOT_PATH/00_TESTBED/testfixture.sv
 $ROOT_PATH/01_RTL/LCD_CTRL.sv
