@@ -49,7 +49,7 @@ RTL = vcs ${TIMESCALE} \
     -l ${log_file} \
     -P ${VERDI_HOME}/share/PLI/VCS/linux64/novas.tab \
        ${VERDI_HOME}/share/PLI/VCS/linux64/pli.a \
-    +define+RTL+tb1 \
+    +define+RTL+tb2 \
     +notimingchecks
 
 
@@ -69,7 +69,7 @@ GATE = vcs ${TIMESCALE} \
     -P ${VERDI_HOME}/share/PLI/VCS/linux64/novas.tab \
        ${VERDI_HOME}/share/PLI/VCS/linux64/pli.a \
 	-v ${ICC013_SIM} \
-    +define+GATE \
+    +define+GATE+tb3 \
 	+neg_tchk \
     -negdelay \
 

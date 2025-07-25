@@ -25,7 +25,7 @@ define_design_lib WORK -path "./work"
 #======================================================
 
 set hdlin_auto_save_templates TRUE
-analyze -format sverilog "$ROOT_PATH/01_RTL/$LCD_CTRL.\sv"
+analyze -format sverilog "$ROOT_PATH/01_RTL/$DESIGN\.sv"
 
 elaborate $DESIGN
 current_design $DESIGN
@@ -42,11 +42,12 @@ link
 # SECTION (D) Set Design Constraints
 #======================================================
 
-source -echo -verbose LCD_CTRL.sdc
+source -echo -verbose $DESIGN\.sdc
 
 #======================================================
 # SECTION - (E) Optimization
 #======================================================
+set case_analysis_with_logic_constants true
 compile -map_effort high -area_effort high
 compile -map_effort high -area_effort high -inc
 
@@ -89,7 +90,7 @@ change_names -hierarchy -rules name_rule
 set verilogout_higher_designs_first true
 write   -format   verilog -hierarchy    -output           ./Netlist/$DESIGN\_syn.v
 write   -format   ddc     -hierarchy    -output           ./Netlist/$DESIGN\_syn.ddc
-write_sdf  -version 3.0 -context verilog -load_delay cell ./Netlist/$DESIGN\_syn.sdf -significant_digits 13
+write_sdf  -version 3.0 -context verilog -load_delay cell ./Netlist/$DESIGN\_syn.sdf -significant_digits 6
 write_sdc                                                 ./Netlist/$DESIGN\_syn.sdc
 #!SECTION
 
@@ -100,6 +101,7 @@ write_sdc                                                 ./Netlist/$DESIGN\_syn
 
 report_area
 report_timing
+check_design
 exit
 
 #!SECTION

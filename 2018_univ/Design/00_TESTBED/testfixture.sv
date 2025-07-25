@@ -1,5 +1,4 @@
 
-`timescale 1ns / 10ps
 `define CYCLE 10.0 //Modify your clock period here
 
 
@@ -86,9 +85,7 @@ module test;
   );
 
 
-  //initial $sdf_annotate(`SDFFILE, top);
-
-`ifdef SDF
+`ifdef GATE
   initial $sdf_annotate(`SDFFILE, LCD_CTRL);
 `endif
 
@@ -121,11 +118,6 @@ module test;
     @(negedge clk) reset = 1'b1;
     #t_reset reset = 1'b0;
   end
-
-  initial begin
-    #100000 $finish;
-  end
-
 
   always @(negedge clk) begin
 
