@@ -35,10 +35,9 @@ def huffman_combine_split(symbols, frequencies):
     for item in items:
         item.pop('order', None)
 
-        pprint_with_combined_last(items, "After initial sort:")
+    pprint_with_combined_last(items, "After initial sort:")
 
     combine_history = []
-    next_order = len(items) + 1  # we’ll still assign—but won’t use
 
     # 3) Combine phase (len(symbols)-1 merges)
     for i in range(1, len(symbols)):
@@ -60,13 +59,11 @@ def huffman_combine_split(symbols, frequencies):
         new_item = {
             'symbols':     right['symbols'] + left['symbols'],
             'freq':        left['freq'] + right['freq'],
-            'order':       next_order,
             'is_combined': True
         }
-        next_order += 1
         items.append(new_item)
 
-        pprint_with_combined_last(items, f"After combine #{i}:")
+        # pprint_with_combined_last(items, f"After combine #{i}:")
 
     print("combine_history:")
     pprint.pprint(combine_history)
@@ -75,17 +72,18 @@ def huffman_combine_split(symbols, frequencies):
     # 4) Split phase: build codes
     codes = {s: "" for s in symbols}
     for merge in reversed(combine_history):
-        print(codes)
         for s in merge['left']:
             codes[s] = codes[s] + '1'
         for s in merge['right']:
             codes[s] = codes[s] + '0'
+        print(codes)
 
     return codes
 
 if __name__ == "__main__":
     symbols     = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6']
-    frequencies = [10,  40,   6,   10,   4,    30]
+    frequencies = [3,  6,   2,   51,   13,    25] # tb1
+    # frequencies = [10,  40,   6,   10,   4,    30] # tb2
 
     codes = huffman_combine_split(symbols, frequencies)
     print("Final Huffman Codes:")

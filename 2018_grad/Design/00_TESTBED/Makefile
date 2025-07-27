@@ -49,7 +49,7 @@ RTL = vcs ${TIMESCALE} \
     -l ${log_file} \
     -P ${VERDI_HOME}/share/PLI/VCS/linux64/novas.tab \
        ${VERDI_HOME}/share/PLI/VCS/linux64/pli.a \
-    +define+RTL+tb1 \
+    +define+RTL+tb3 \
     +notimingchecks
 
 
