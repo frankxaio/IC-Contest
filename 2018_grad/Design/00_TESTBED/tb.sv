@@ -64,12 +64,11 @@ module tb;
   initial begin
     $fsdbDumpfile("huffman.fsdb");
     $fsdbDumpvars(0);
-    $fsdbDumpvars(0, u_huffman);
-    $fsdbDumpvars(0, u_huffman.selection_sort_inst.items);
-    $fsdbDumpvars(0, u_huffman.items);
-    $fsdbDumpvars(0, u_huffman.unsorted);
-    $fsdbDumpvars(0, u_huffman.comb_item_C1, u_huffman.comb_item_C2, u_huffman.comb_item_C3,
-                  u_huffman.comb_item_C4, u_huffman.comb_item_C5);
+    // $fsdbDumpvars(0, u_huffman.selection_sort_inst.items);
+    // $fsdbDumpvars(0, u_huffman.items);
+    // $fsdbDumpvars(0, u_huffman.unsorted);
+    // $fsdbDumpvars(0, u_huffman.comb_item_C1, u_huffman.comb_item_C2, u_huffman.comb_item_C3,
+    //               u_huffman.comb_item_C4, u_huffman.comb_item_C5);
     $fsdbDumpMDA;
   end
 
@@ -122,6 +121,10 @@ module tb;
     #0 reset = 1'b0;
     #`CLK_period reset = 1'b1;
     #(`CLK_period * 2) reset = 1'b0;
+  end
+
+  initial begin
+    #20000 $finish;
   end
 
   initial begin
