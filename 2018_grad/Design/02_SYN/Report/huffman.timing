@@ -6,7 +6,7 @@ Report : timing
         -max_paths 3
 Design : huffman
 Version: T-2022.03-SP2
-Date   : Tue Jul 29 01:30:04 2025
+Date   : Tue Aug  5 12:40:08 2025
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.

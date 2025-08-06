@@ -8,7 +8,7 @@ Report : power
         -analysis_effort low
 Design : LCD_CTRL
 Version: T-2022.03-SP2
-Date   : Wed Jul 23 15:32:42 2025
+Date   : Sat Jul 26 23:02:17 2025
 ****************************************
 
 
@@ -39,12 +39,12 @@ Attributes
 i - Including register clock pin internal power
 
 
-  Cell Internal Power  =   1.1898 mW   (78%)
-  Net Switching Power  = 341.9412 uW   (22%)
+  Cell Internal Power  =   1.0334 mW   (75%)
+  Net Switching Power  = 340.0673 uW   (25%)
                          ---------
-Total Dynamic Power    =   1.5317 mW  (100%)
+Total Dynamic Power    =   1.3735 mW  (100%)
 
-Cell Leakage Power     =  67.1003 uW
+Cell Leakage Power     =  69.7027 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -53,10 +53,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network      1.1003            0.0000            0.0000            0.0000  (   0.00%)  i
-register       9.3250e-03        2.2124e-02        1.4029e+07            1.1458  (  71.67%)
+clock_network      0.9340            0.0000            0.0000            0.0000  (   0.00%)  i
+register       2.4532e-02        2.4284e-02        1.1994e+07            0.9948  (  68.93%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational  8.0138e-02            0.3198        5.3072e+07            0.4530  (  28.33%)
+combinational  7.4846e-02            0.3158        5.7709e+07            0.4483  (  31.07%)
 --------------------------------------------------------------------------------------------------
-Total              1.1898 mW         0.3419 mW     6.7100e+07 pW         1.5988 mW
+Total              1.0334 mW         0.3401 mW     6.9703e+07 pW         1.4432 mW
 1

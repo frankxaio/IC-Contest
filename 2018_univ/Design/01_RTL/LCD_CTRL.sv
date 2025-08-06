@@ -53,7 +53,7 @@ module LCD_CTRL (
 
   logic [2*BIT_WIDTH-1:0] calc_res, calc_res_tmp1, calc_res_tmp2;
 
-  logic [2:0] rom_rd_x, rom_rd_y;
+  logic [2:0] rom_rd_x, rom_rd_y, ram_wr_x, ram_wr_y;
 
   // ===================================================
   // Read ROM
@@ -75,8 +75,10 @@ module LCD_CTRL (
 
 
   // rom_rd_x, rom_rd_y
-  assign rom_rd_x = (cs == ROM_RD) ? rom_rd_cnt_r[2:0] : (cs == CMD_WR) ? rom_rd_cnt[2:0] : '0;
-  assign rom_rd_y = (cs == ROM_RD) ? rom_rd_cnt_r[5:3] : (cs == CMD_WR) ? rom_rd_cnt[5:3] : '0;
+  assign rom_rd_x = rom_rd_cnt_r[2:0];
+  assign rom_rd_y = rom_rd_cnt_r[5:3];
+  assign ram_wr_x = rom_rd_cnt[2:0];
+  assign ram_wr_y = rom_rd_cnt[5:3];
 
   // IROM_A
   always_ff @(posedge clk or posedge reset) begin
@@ -149,7 +151,7 @@ module LCD_CTRL (
   // IRAM_D
   always_ff @(posedge clk or posedge reset) begin
     if (reset) IRAM_D <= '0;
-    else if (cs == CMD_WR) IRAM_D <= map[rom_rd_y][rom_rd_x];
+    else if (cs == CMD_WR) IRAM_D <= map[ram_wr_y][ram_wr_x];
   end
 
   // ===================================================
@@ -184,16 +186,6 @@ module LCD_CTRL (
         end
       endcase
     end
-  end
-
-
-  // ===================================================
-  // cmd_cnt
-  // ===================================================
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) cmd_cnt <= '0;
-    else if (cs == IDLE) cmd_cnt <= '0;
-    else cmd_cnt <= cmd_cnt + 1'b1;
   end
 
 
@@ -276,20 +268,20 @@ module LCD_CTRL (
           default: ns = (cmd_valid == 1) ? CMD_WR : IDLE;  // Default to write or error handling
         endcase
       end
-      ROM_RD:  ns = (rom_rd_cnt == 64) ? IDLE : ROM_RD;
+      ROM_RD:  ns = (rom_rd_cnt_r == 63) ? IDLE : ROM_RD;
       CMD_SU:  ns = IDLE;
       CMD_SD:  ns = IDLE;
       CMD_SL:  ns = IDLE;
       CMD_SR:  ns = IDLE;
-      CMD_MAX: ns = (cmd_cnt == 1) ? IDLE : cs;
-      CMD_MIN: ns = (cmd_cnt == 1) ? IDLE : cs;
-      CMD_AVG: ns = (cmd_cnt == 1) ? IDLE : cs;
+      CMD_MAX: ns = IDLE;
+      CMD_MIN: ns = IDLE;
+      CMD_AVG: ns = IDLE;
       CMD_CW:  ns = IDLE;
       CMD_CCW: ns = IDLE;
       CMD_MX:  ns = IDLE;
       CMD_MY:  ns = IDLE;
       // Write 64 points into RAM, one point per cycle
-      CMD_WR:  ns = (rom_rd_cnt == 64) ? DONE : CMD_WR;
+      CMD_WR:  ns = (rom_rd_cnt_r == 63) ? DONE : CMD_WR;
       DONE:    ns = IDLE;
       default: ns = cs;  // default: hold current state
     endcase
@@ -300,4 +292,3 @@ module LCD_CTRL (
   assign busy = (cs != IDLE);
 
 endmodule
-

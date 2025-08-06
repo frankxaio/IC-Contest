@@ -6,24 +6,24 @@
 `define tb1
 
 `ifdef tb1
-`define PAT "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/pattern1.dat"
-`define EXP "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/golden1.dat"
+  `define PAT "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/pattern1.dat"
+  `define EXP "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/golden1.dat"
 `endif
 
 `ifdef tb2
-`define PAT "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/pattern2.dat"
-`define EXP "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/golden2.dat"
+  `define PAT "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/pattern2.dat"
+  `define EXP "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/golden2.dat"
 `endif
 
 `ifdef tb3
-`define PAT "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/pattern3.dat"
-`define EXP "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/golden3.dat"
+  `define PAT "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/pattern3.dat"
+  `define EXP "/home/host/Documents/IC-Contest/2018_grad/Design/00_TESTBED/dat/golden3.dat"
 `endif
 
-//`ifdef tb4
-//  `define PAT "./pattern4.dat"
-//  `define EXP "./golden4.dat"
-//`endif
+// `ifdef tb4
+//   `define PAT "./pattern4.dat"
+//   `define EXP "./golden4.dat"
+// `endif
 //
 //`ifdef tb5
 //  `define PAT "./pattern5.dat"
@@ -47,9 +47,9 @@ module tb;
   wire    [7:0] HC                        [ 1:6];
   wire    [7:0] M                         [ 1:6];
 
-  reg           flag1;  // CNT PASS or not
-  reg           flag2;  // HC PASS or not
-  reg           flag3;  // M PASS or not
+  reg           flag1; // CNT PASS or not
+  reg           flag2; // HC PASS or not
+  reg           flag3; // M PASS or not
   reg           done1;
 
   wire [47:0] CNT_G, CNT_EXP;
@@ -57,9 +57,9 @@ module tb;
   wire [47:0] M_G, M_EXP;
 
 
-`ifdef GATE
-  initial $sdf_annotate(`SDFFILE, u_huffman);
-`endif
+  `ifdef GATE
+    initial $sdf_annotate(`SDFFILE, u_huffman);
+  `endif
 
   initial begin
     $fsdbDumpfile("huffman.fsdb");
@@ -79,26 +79,26 @@ module tb;
     .gray_valid(gray_valid),
     .gray_data (gray_data),
     .CNT_valid (CNT_valid),
-    .CNT1      (CNT[1]),      // should compare with exp_mem[0]
-    .CNT2      (CNT[2]),      // should compare with exp_mem[1]
-    .CNT3      (CNT[3]),      // should compare with exp_mem[2]
-    .CNT4      (CNT[4]),      // should compare with exp_mem[3]
-    .CNT5      (CNT[5]),      // should compare with exp_mem[4]
-    .CNT6      (CNT[6]),      // should compare with exp_mem[5]
+    .CNT1      (CNT[1]), // should compare with exp_mem[0]
+    .CNT2      (CNT[2]), // should compare with exp_mem[1]
+    .CNT3      (CNT[3]), // should compare with exp_mem[2]
+    .CNT4      (CNT[4]), // should compare with exp_mem[3]
+    .CNT5      (CNT[5]), // should compare with exp_mem[4]
+    .CNT6      (CNT[6]), // should compare with exp_mem[5]
     .code_valid(code_valid),
-    .HC1       (HC[1]),       // should compare with exp_mem[6]
-    .HC2       (HC[2]),       // should compare with exp_mem[7]
-    .HC3       (HC[3]),       // should compare with exp_mem[8]
-    .HC4       (HC[4]),       // should compare with exp_mem[9]
-    .HC5       (HC[5]),       // should compare with exp_mem[10]
-    .HC6       (HC[6]),       // should compare with exp_mem[11]
-    .M1        (M[1]),        // should compare with exp_mem[12]
-    .M2        (M[2]),        // should compare with exp_mem[13]
-    .M3        (M[3]),        // should compare with exp_mem[14]
-    .M4        (M[4]),        // should compare with exp_mem[15]
-    .M5        (M[5]),        // should compare with exp_mem[16]
+    .HC1       (HC[1]), // should compare with exp_mem[6]
+    .HC2       (HC[2]), // should compare with exp_mem[7]
+    .HC3       (HC[3]), // should compare with exp_mem[8]
+    .HC4       (HC[4]), // should compare with exp_mem[9]
+    .HC5       (HC[5]), // should compare with exp_mem[10]
+    .HC6       (HC[6]), // should compare with exp_mem[11]
+    .M1        (M[1]), // should compare with exp_mem[12]
+    .M2        (M[2]), // should compare with exp_mem[13]
+    .M3        (M[3]), // should compare with exp_mem[14]
+    .M4        (M[4]), // should compare with exp_mem[15]
+    .M5        (M[5]), // should compare with exp_mem[16]
     .M6        (M[6])
-  );  // should compare with exp_mem[17]
+  ); // should compare with exp_mem[17]
 
   assign CNT_G   = {CNT[1], CNT[2], CNT[3], CNT[4], CNT[5], CNT[6]};
   assign CNT_EXP = {exp_mem[0], exp_mem[1], exp_mem[2], exp_mem[3], exp_mem[4], exp_mem[5]};
@@ -109,7 +109,7 @@ module tb;
 
   initial $readmemh(`PAT, pat_mem);
   initial $readmemh(`EXP, exp_mem);
-  initial $display("%s and %s were used for this simulation.", `PAT, `EXP);  //
+  initial $display("%s and %s were used for this simulation.", `PAT, `EXP); //
 
   initial CLK = 1'b0;
 
@@ -148,7 +148,7 @@ module tb;
     end else begin
 
       if (CNT_valid == 1'b1) begin
-        if (CNT_G == CNT_EXP) begin  // flag1 1 means PASS, 0 means ERROR
+        if (CNT_G == CNT_EXP) begin // flag1 1 means PASS, 0 means ERROR
           $display("Check CNT : PASS");
           flag1 <= 1'b1;
         end else begin
@@ -162,9 +162,9 @@ module tb;
       if (code_valid == 1'b1) begin
 
         case ({
-          (HC_G == HC_EXP), (M_G == M_EXP)
-        })  // (HC_G == HC_EXP) true means HC PASS
-          2'b00: begin  // (M_G == M_EXP) true means M PASS
+        (HC_G == HC_EXP), (M_G == M_EXP)
+        }) // (HC_G == HC_EXP) true means HC PASS
+          2'b00: begin // (M_G == M_EXP) true means M PASS
             $display("Check HC : ERROR");
             $display("Check M : ERROR");
             $display("Simulation stop here.");

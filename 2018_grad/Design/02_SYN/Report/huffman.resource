@@ -3,7 +3,7 @@
 Report : resources
 Design : huffman
 Version: T-2022.03-SP2
-Date   : Tue Jul 29 01:30:04 2025
+Date   : Tue Aug  5 12:40:08 2025
 ****************************************
 
 Resource Sharing Report for design huffman in file
@@ -59,12 +59,12 @@ Resource Sharing Report for design selection_sort_6_WIDTH8 in file
 |          |              |            | Contained     |                      |
 | Resource | Module       | Parameters | Resources     | Contained Operations |
 ===============================================================================
-| r489     | DW01_inc     | width=3    |               | add_898 add_934      |
-| r501     | DW_cmp       | width=8    |               | lt_907               |
-| r503     | DW_cmp       | width=8    |               | eq_908               |
-| r505     | DW_cmp       | width=8    |               | gt_910               |
-| r507     | DW_cmp       | width=3    |               | lt_915               |
-| r509     | DW01_inc     | width=3    |               | add_916              |
+| r489     | DW01_inc     | width=3    |               | add_897 add_933      |
+| r501     | DW_cmp       | width=8    |               | lt_906               |
+| r503     | DW_cmp       | width=8    |               | eq_907               |
+| r505     | DW_cmp       | width=8    |               | gt_909               |
+| r507     | DW_cmp       | width=3    |               | lt_914               |
+| r509     | DW01_inc     | width=3    |               | add_915              |
 ===============================================================================
 
 

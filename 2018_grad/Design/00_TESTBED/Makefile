@@ -69,7 +69,7 @@ GATE = vcs ${TIMESCALE} \
     -P ${VERDI_HOME}/share/PLI/VCS/linux64/novas.tab \
        ${VERDI_HOME}/share/PLI/VCS/linux64/pli.a \
 	-v ${ICC013_SIM} \
-    +define+GATE+tb3 \
+    +define+GATE+tb2 \
 	+neg_tchk \
     -negdelay \
 

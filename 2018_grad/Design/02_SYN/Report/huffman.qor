@@ -3,7 +3,7 @@
 Report : qor
 Design : huffman
 Version: T-2022.03-SP2
-Date   : Tue Jul 29 01:30:05 2025
+Date   : Tue Aug  5 12:40:08 2025
 ****************************************
 
 
@@ -63,12 +63,12 @@ Date   : Tue Jul 29 01:30:05 2025
 
   Compile CPU Statistics
   -----------------------------------------
-  Resource Sharing:                    0.23
-  Logic Optimization:                  0.09
-  Mapping Optimization:                1.87
+  Resource Sharing:                    0.15
+  Logic Optimization:                  0.08
+  Mapping Optimization:                1.14
   -----------------------------------------
-  Overall Compile Time:                3.44
-  Overall Compile Wall Clock Time:     3.22
+  Overall Compile Time:                2.51
+  Overall Compile Wall Clock Time:     2.87
 
   --------------------------------------------------------------------
 

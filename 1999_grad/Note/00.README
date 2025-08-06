@@ -1,0 +1,38 @@
+1. This directory contains 10 files:
+	00.README	       This file
+        cell_based_Verilog.pdf The PDF file of the Contest text
+	postfix.v	       The decalaration of the postfix module
+        test.v                 testfixture file
+        rtl.f                  RTL simulation option file
+        INPUT.DAT              input data
+        EXPECT.DAT             expected result
+        in_file		       The initial file of the Compass Mercury 
+ 			       Delay Calculator.
+        dlc.init	       The initial file of the Cadence CDC.
+        report.000             The design report file
+
+2. To test your circuit's performance you can change the clock
+   period by modifing the parameter "HALF_CYCLE_TIME" in test.v.
+   clock period = HALF_CYCLE_TIME * 2
+
+3. You can use the Compass Mercury Delay Calculator with the Linear
+   Model(cb60hp231d.vmd) or use the Cadence CDC with the Table Model
+   (hp_io_time.v,hp_io_typ.ctlf) to do simulation.
+
+   To use the Compass Mercury Delay Calculator please reference the
+   test.v:   // $VTOOLS_decal ("in_file","product.xch");
+
+   To use the Cadence CDC please reference the test.v:
+             // $cdc(top, "dlc.init");
+   Please modify the CTLF_FILE specification in the dlc.init:
+   	     CTLF_FILE "Your_Lib_Path/hp_io_typ.ctlf"
+
+   P.S. The Compass Mercury Delay Calculator can only be used on the
+        Solaris platform.
+        The Cadence CDC can be used on the SunOS 4.1.x and the Solaris
+        platform. 
+
+4. If you want to save the SHM waveform please reference the test.v:
+             // $shm_open("waves.shm");
+	     // $shm_probe("AS");
+

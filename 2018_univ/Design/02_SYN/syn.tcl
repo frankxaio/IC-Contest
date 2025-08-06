@@ -50,6 +50,7 @@ source -echo -verbose $DESIGN\.sdc
 set case_analysis_with_logic_constants true
 compile -map_effort high -area_effort high
 compile -map_effort high -area_effort high -inc
+# compile_ultra
 
 
 #======================================================

@@ -82,9 +82,10 @@ def huffman_combine_split(symbols, frequencies):
 
 if __name__ == "__main__":
     symbols     = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6']
-    frequencies = [3,  6,   2,   51,   13,    25] # tb1
+    # frequencies = [3,  6,   2,   51,   13,    25] # tb1
     # frequencies = [10,  40,   6,   10,   4,    30] # tb2
     # frequencies = [9,  7,   36,   8,   10,    30] # tb3
+    frequencies = [15,  17,   17,  17,   17,    17] # tb4
 
     codes = huffman_combine_split(symbols, frequencies)
     print("Final Huffman Codes:")

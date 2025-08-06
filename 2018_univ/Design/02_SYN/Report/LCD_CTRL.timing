@@ -6,15 +6,157 @@ Report : timing
         -max_paths 3
 Design : LCD_CTRL
 Version: T-2022.03-SP2
-Date   : Wed Jul 23 15:32:41 2025
+Date   : Sat Jul 26 23:02:16 2025
 ****************************************
 
 Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
-  Startpoint: op_y_reg[1]
+  Startpoint: map_reg[7][0][0]
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: map_reg[1][4][4]
+  Endpoint: map_reg[5][3][6]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  LCD_CTRL           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  map_reg[7][0][0]/CK (DFFQX1)                            0.00       0.50 r
+  map_reg[7][0][0]/Q (DFFQX1)                             0.92       1.42 r
+  U6157/Y (CLKINVX1)                                      0.31       1.73 f
+  U13193/Y (INVX3)                                        0.58       2.31 r
+  U14950/Y (AOI22X1)                                      0.30       2.61 f
+  U14954/Y (NAND4X1)                                      0.24       2.85 r
+  U5321/Y (CLKBUFX3)                                      0.43       3.29 r
+  U5156/Y (AO22X1)                                        0.38       3.66 r
+  U6413/Y (AOI221X2)                                      0.13       3.79 f
+  U6477/Y (OAI22X2)                                       0.31       4.10 r
+  add_2_root_add_0_root_add_227_3/B[0] (LCD_CTRL_DW01_add_2)
+                                                          0.00       4.10 r
+  add_2_root_add_0_root_add_227_3/U1/Y (AND2X2)           0.24       4.34 r
+  add_2_root_add_0_root_add_227_3/U1_1/S (ADDFHX4)        0.27       4.61 r
+  add_2_root_add_0_root_add_227_3/SUM[1] (LCD_CTRL_DW01_add_2)
+                                                          0.00       4.61 r
+  add_1_root_add_0_root_add_227_3/A[1] (LCD_CTRL_DW01_add_1)
+                                                          0.00       4.61 r
+  add_1_root_add_0_root_add_227_3/U1_1/CO (ADDFXL)        0.73       5.34 r
+  add_1_root_add_0_root_add_227_3/U1_2/S (ADDFXL)         0.62       5.96 r
+  add_1_root_add_0_root_add_227_3/SUM[2] (LCD_CTRL_DW01_add_1)
+                                                          0.00       5.96 r
+  add_0_root_add_0_root_add_227_3/B[2] (LCD_CTRL_DW01_add_0)
+                                                          0.00       5.96 r
+  add_0_root_add_0_root_add_227_3/U1_2/CO (ADDFXL)        0.87       6.83 r
+  add_0_root_add_0_root_add_227_3/U1_3/CO (ADDFX2)        0.34       7.17 r
+  add_0_root_add_0_root_add_227_3/U1_4/CO (ADDFX2)        0.29       7.46 r
+  add_0_root_add_0_root_add_227_3/U1_5/CO (ADDFHX2)       0.21       7.67 r
+  add_0_root_add_0_root_add_227_3/U1_6/CO (ADDFHX2)       0.21       7.88 r
+  add_0_root_add_0_root_add_227_3/U1_7/CO (ADDFHX2)       0.25       8.13 r
+  add_0_root_add_0_root_add_227_3/U1/Y (XOR2X2)           0.22       8.35 f
+  add_0_root_add_0_root_add_227_3/SUM[8] (LCD_CTRL_DW01_add_0)
+                                                          0.00       8.35 f
+  U4037/Y (AOI221X2)                                      0.25       8.60 r
+  U4036/Y (AOI2BB2X4)                                     0.23       8.83 r
+  U13119/Y (BUFX4)                                        0.18       9.01 r
+  U6423/Y (CLKBUFX6)                                      0.29       9.31 r
+  U6342/Y (NAND2XL)                                       0.21       9.52 f
+  U5556/Y (NOR4X1)                                        0.38       9.89 r
+  U7106/Y (OAI2BB2X1)                                     0.20      10.09 f
+  map_reg[5][3][6]/D (DFFX1)                              0.00      10.09 f
+  data arrival time                                                 10.09
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             0.50      10.50
+  clock uncertainty                                      -0.10      10.40
+  map_reg[5][3][6]/CK (DFFX1)                             0.00      10.40 r
+  library setup time                                     -0.31      10.09
+  data required time                                                10.09
+  --------------------------------------------------------------------------
+  data required time                                                10.09
+  data arrival time                                                -10.09
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+  Startpoint: map_reg[7][0][0]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: map_reg[6][3][6]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  LCD_CTRL           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  map_reg[7][0][0]/CK (DFFQX1)                            0.00       0.50 r
+  map_reg[7][0][0]/Q (DFFQX1)                             0.92       1.42 r
+  U6157/Y (CLKINVX1)                                      0.31       1.73 f
+  U13193/Y (INVX3)                                        0.58       2.31 r
+  U14950/Y (AOI22X1)                                      0.30       2.61 f
+  U14954/Y (NAND4X1)                                      0.24       2.85 r
+  U5321/Y (CLKBUFX3)                                      0.43       3.29 r
+  U5156/Y (AO22X1)                                        0.38       3.66 r
+  U6413/Y (AOI221X2)                                      0.13       3.79 f
+  U6477/Y (OAI22X2)                                       0.31       4.10 r
+  add_2_root_add_0_root_add_227_3/B[0] (LCD_CTRL_DW01_add_2)
+                                                          0.00       4.10 r
+  add_2_root_add_0_root_add_227_3/U1/Y (AND2X2)           0.24       4.34 r
+  add_2_root_add_0_root_add_227_3/U1_1/S (ADDFHX4)        0.27       4.61 r
+  add_2_root_add_0_root_add_227_3/SUM[1] (LCD_CTRL_DW01_add_2)
+                                                          0.00       4.61 r
+  add_1_root_add_0_root_add_227_3/A[1] (LCD_CTRL_DW01_add_1)
+                                                          0.00       4.61 r
+  add_1_root_add_0_root_add_227_3/U1_1/CO (ADDFXL)        0.73       5.34 r
+  add_1_root_add_0_root_add_227_3/U1_2/S (ADDFXL)         0.62       5.96 r
+  add_1_root_add_0_root_add_227_3/SUM[2] (LCD_CTRL_DW01_add_1)
+                                                          0.00       5.96 r
+  add_0_root_add_0_root_add_227_3/B[2] (LCD_CTRL_DW01_add_0)
+                                                          0.00       5.96 r
+  add_0_root_add_0_root_add_227_3/U1_2/CO (ADDFXL)        0.87       6.83 r
+  add_0_root_add_0_root_add_227_3/U1_3/CO (ADDFX2)        0.34       7.17 r
+  add_0_root_add_0_root_add_227_3/U1_4/CO (ADDFX2)        0.29       7.46 r
+  add_0_root_add_0_root_add_227_3/U1_5/CO (ADDFHX2)       0.21       7.67 r
+  add_0_root_add_0_root_add_227_3/U1_6/CO (ADDFHX2)       0.21       7.88 r
+  add_0_root_add_0_root_add_227_3/U1_7/CO (ADDFHX2)       0.25       8.13 r
+  add_0_root_add_0_root_add_227_3/U1/Y (XOR2X2)           0.22       8.35 f
+  add_0_root_add_0_root_add_227_3/SUM[8] (LCD_CTRL_DW01_add_0)
+                                                          0.00       8.35 f
+  U4037/Y (AOI221X2)                                      0.25       8.60 r
+  U4036/Y (AOI2BB2X4)                                     0.23       8.83 r
+  U13119/Y (BUFX4)                                        0.18       9.01 r
+  U6423/Y (CLKBUFX6)                                      0.29       9.31 r
+  U6360/Y (NAND2XL)                                       0.21       9.52 f
+  U5557/Y (NOR4X1)                                        0.38       9.89 r
+  U7111/Y (OAI2BB2X1)                                     0.20      10.09 f
+  map_reg[6][3][6]/D (DFFX1)                              0.00      10.09 f
+  data arrival time                                                 10.09
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             0.50      10.50
+  clock uncertainty                                      -0.10      10.40
+  map_reg[6][3][6]/CK (DFFX1)                             0.00      10.40 r
+  library setup time                                     -0.31      10.09
+  data required time                                                10.09
+  --------------------------------------------------------------------------
+  data required time                                                10.09
+  data arrival time                                                -10.09
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+  Startpoint: op_y_reg[2]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: map_reg[1][3][1]
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: max
@@ -27,193 +169,44 @@ Wire Load Model Mode: top
   -----------------------------------------------------------
   clock clk (rise edge)                    0.00       0.00
   clock network delay (ideal)              0.50       0.50
-  op_y_reg[1]/CK (DFFRHQX8)                0.00       0.50 r
-  op_y_reg[1]/Q (DFFRHQX8)                 0.30       0.80 r
-  U6429/Y (INVX16)                         0.09       0.88 f
-  U19111/Y (NAND2X8)                       0.12       1.00 r
-  U4331/Y (XNOR2X4)                        0.16       1.16 f
-  U9344/Y (BUFX16)                         0.13       1.29 f
-  U5660/Y (BUFX4)                          0.16       1.45 f
-  U6835/Y (CLKBUFX2)                       0.31       1.76 f
-  U5675/Y (CLKINVX1)                       0.30       2.07 r
-  U6101/Y (NOR2X2)                         0.17       2.24 f
-  U17334/Y (NOR2BX1)                       0.25       2.49 f
-  U5942/Y (CLKINVX1)                       0.26       2.75 r
-  U5943/Y (INVX12)                         0.41       3.16 f
-  U7213/Y (AOI22XL)                        0.55       3.71 r
-  U17349/Y (NAND4X1)                       0.26       3.96 f
-  U5289/Y (AO22X1)                         0.43       4.39 f
-  U5288/Y (NAND4BX1)                       0.64       5.03 f
-  U6140/Y (OAI222X2)                       0.46       5.49 r
-  U6395/Y (AOI22X4)                        0.19       5.68 f
-  U6100/Y (AOI2BB1X4)                      0.18       5.87 r
-  U6351/Y (INVX12)                         0.14       6.00 f
-  U5322/Y (AOI22X2)                        0.29       6.30 r
-  U6094/Y (INVX4)                          0.12       6.42 f
-  U5301/Y (NOR2BX2)                        0.22       6.63 f
-  U5300/Y (OA22X2)                         0.36       6.99 f
-  U6139/Y (OAI22X2)                        0.18       7.17 r
-  U19110/Y (OAI221X2)                      0.21       7.38 f
-  U19109/Y (AO22X4)                        0.31       7.69 f
-  U9827/Y (OAI2BB1X4)                      0.11       7.80 r
-  U4165/Y (NAND2BX4)                       0.33       8.13 r
-  U6128/Y (OAI222X2)                       0.23       8.36 f
-  U5325/Y (AOI221X1)                       0.33       8.69 r
-  U4078/Y (AOI2BB2X4)                      0.30       8.98 r
-  U6474/Y (BUFX12)                         0.29       9.28 r
-  U10292/Y (OAI21XL)                       0.23       9.50 f
-  U12153/Y (NOR4X1)                        0.37       9.87 r
-  U12152/Y (OAI2BB2XL)                     0.24      10.11 f
-  map_reg[1][4][4]/D (DFFXL)               0.00      10.11 f
-  data arrival time                                  10.11
+  op_y_reg[2]/CK (DFFSHQX4)                0.00       0.50 r
+  op_y_reg[2]/Q (DFFSHQX4)                 0.30       0.80 r
+  U5358/Y (INVX6)                          0.17       0.97 f
+  U5359/Y (INVX4)                          0.21       1.18 r
+  U4323/Y (XNOR2X4)                        0.21       1.39 f
+  U5258/Y (BUFX6)                          0.16       1.55 f
+  U5270/Y (BUFX16)                         0.13       1.68 f
+  U7024/Y (CLKBUFX2)                       0.39       2.07 f
+  U5624/Y (CLKINVX1)                       0.42       2.49 r
+  U15985/Y (NOR2X1)                        0.24       2.74 f
+  U5674/Y (AND2X1)                         0.56       3.29 f
+  U9915/Y (CLKBUFX3)                       0.94       4.24 f
+  U9743/Y (CLKBUFX3)                       0.84       5.07 f
+  U9032/Y (AOI22XL)                        0.63       5.70 r
+  U15991/Y (NAND4X1)                       0.27       5.98 f
+  U16186/Y (AOI221XL)                      0.61       6.59 r
+  U16189/Y (OAI22XL)                       0.33       6.92 f
+  U10897/Y (AOI222XL)                      0.66       7.58 r
+  U10896/Y (CLKBUFX3)                      0.60       8.18 r
+  U10116/Y (CLKBUFX3)                      0.39       8.57 r
+  U9870/Y (CLKBUFX3)                       0.64       9.21 r
+  U10302/Y (OAI21XL)                       0.30       9.51 f
+  U11509/Y (NOR4X1)                        0.39       9.90 r
+  U7209/Y (OAI2BB2X1)                      0.20      10.09 f
+  map_reg[1][3][1]/D (DFFX1)               0.00      10.09 f
+  data arrival time                                  10.09
 
   clock clk (rise edge)                   10.00      10.00
   clock network delay (ideal)              0.50      10.50
   clock uncertainty                       -0.10      10.40
-  map_reg[1][4][4]/CK (DFFXL)              0.00      10.40 r
-  library setup time                      -0.28      10.12
-  data required time                                 10.12
+  map_reg[1][3][1]/CK (DFFX1)              0.00      10.40 r
+  library setup time                      -0.30      10.10
+  data required time                                 10.10
   -----------------------------------------------------------
-  data required time                                 10.12
-  data arrival time                                 -10.11
+  data required time                                 10.10
+  data arrival time                                 -10.09
   -----------------------------------------------------------
-  slack (MET)                                         0.01
-
-
-  Startpoint: op_y_reg[1]
-              (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: map_reg[0][5][4]
-            (rising edge-triggered flip-flop clocked by clk)
-  Path Group: clk
-  Path Type: max
-
-  Des/Clust/Port     Wire Load Model       Library
-  ------------------------------------------------
-  LCD_CTRL           tsmc13_wl10           slow
-
-  Point                                    Incr       Path
-  -----------------------------------------------------------
-  clock clk (rise edge)                    0.00       0.00
-  clock network delay (ideal)              0.50       0.50
-  op_y_reg[1]/CK (DFFRHQX8)                0.00       0.50 r
-  op_y_reg[1]/Q (DFFRHQX8)                 0.30       0.80 r
-  U6429/Y (INVX16)                         0.09       0.88 f
-  U19111/Y (NAND2X8)                       0.12       1.00 r
-  U4331/Y (XNOR2X4)                        0.16       1.16 f
-  U9344/Y (BUFX16)                         0.13       1.29 f
-  U5660/Y (BUFX4)                          0.16       1.45 f
-  U6835/Y (CLKBUFX2)                       0.31       1.76 f
-  U5675/Y (CLKINVX1)                       0.30       2.07 r
-  U6101/Y (NOR2X2)                         0.17       2.24 f
-  U17334/Y (NOR2BX1)                       0.25       2.49 f
-  U5942/Y (CLKINVX1)                       0.26       2.75 r
-  U5943/Y (INVX12)                         0.41       3.16 f
-  U7213/Y (AOI22XL)                        0.55       3.71 r
-  U17349/Y (NAND4X1)                       0.26       3.96 f
-  U5289/Y (AO22X1)                         0.43       4.39 f
-  U5288/Y (NAND4BX1)                       0.64       5.03 f
-  U6140/Y (OAI222X2)                       0.46       5.49 r
-  U6395/Y (AOI22X4)                        0.19       5.68 f
-  U6100/Y (AOI2BB1X4)                      0.18       5.87 r
-  U6351/Y (INVX12)                         0.14       6.00 f
-  U5322/Y (AOI22X2)                        0.29       6.30 r
-  U6094/Y (INVX4)                          0.12       6.42 f
-  U5301/Y (NOR2BX2)                        0.22       6.63 f
-  U5300/Y (OA22X2)                         0.36       6.99 f
-  U6139/Y (OAI22X2)                        0.18       7.17 r
-  U19110/Y (OAI221X2)                      0.21       7.38 f
-  U19109/Y (AO22X4)                        0.31       7.69 f
-  U9827/Y (OAI2BB1X4)                      0.11       7.80 r
-  U4165/Y (NAND2BX4)                       0.33       8.13 r
-  U6128/Y (OAI222X2)                       0.23       8.36 f
-  U5325/Y (AOI221X1)                       0.33       8.69 r
-  U4078/Y (AOI2BB2X4)                      0.30       8.98 r
-  U6437/Y (BUFX12)                         0.29       9.28 r
-  U10124/Y (OAI21XL)                       0.23       9.50 f
-  U5368/Y (NOR4X1)                         0.37       9.87 r
-  U11588/Y (OAI2BB2XL)                     0.24      10.11 f
-  map_reg[0][5][4]/D (DFFXL)               0.00      10.11 f
-  data arrival time                                  10.11
-
-  clock clk (rise edge)                   10.00      10.00
-  clock network delay (ideal)              0.50      10.50
-  clock uncertainty                       -0.10      10.40
-  map_reg[0][5][4]/CK (DFFXL)              0.00      10.40 r
-  library setup time                      -0.29      10.11
-  data required time                                 10.11
-  -----------------------------------------------------------
-  data required time                                 10.11
-  data arrival time                                 -10.11
-  -----------------------------------------------------------
-  slack (MET)                                         0.01
-
-
-  Startpoint: op_y_reg[1]
-              (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: map_reg[6][6][4]
-            (rising edge-triggered flip-flop clocked by clk)
-  Path Group: clk
-  Path Type: max
-
-  Des/Clust/Port     Wire Load Model       Library
-  ------------------------------------------------
-  LCD_CTRL           tsmc13_wl10           slow
-
-  Point                                    Incr       Path
-  -----------------------------------------------------------
-  clock clk (rise edge)                    0.00       0.00
-  clock network delay (ideal)              0.50       0.50
-  op_y_reg[1]/CK (DFFRHQX8)                0.00       0.50 r
-  op_y_reg[1]/Q (DFFRHQX8)                 0.30       0.80 r
-  U6429/Y (INVX16)                         0.09       0.88 f
-  U19111/Y (NAND2X8)                       0.12       1.00 r
-  U4331/Y (XNOR2X4)                        0.16       1.16 f
-  U9344/Y (BUFX16)                         0.13       1.29 f
-  U5660/Y (BUFX4)                          0.16       1.45 f
-  U6835/Y (CLKBUFX2)                       0.31       1.76 f
-  U5675/Y (CLKINVX1)                       0.30       2.07 r
-  U6101/Y (NOR2X2)                         0.17       2.24 f
-  U17334/Y (NOR2BX1)                       0.25       2.49 f
-  U5942/Y (CLKINVX1)                       0.26       2.75 r
-  U5943/Y (INVX12)                         0.41       3.16 f
-  U7213/Y (AOI22XL)                        0.55       3.71 r
-  U17349/Y (NAND4X1)                       0.26       3.96 f
-  U5289/Y (AO22X1)                         0.43       4.39 f
-  U5288/Y (NAND4BX1)                       0.64       5.03 f
-  U6140/Y (OAI222X2)                       0.46       5.49 r
-  U6395/Y (AOI22X4)                        0.19       5.68 f
-  U6100/Y (AOI2BB1X4)                      0.18       5.87 r
-  U6351/Y (INVX12)                         0.14       6.00 f
-  U5322/Y (AOI22X2)                        0.29       6.30 r
-  U6094/Y (INVX4)                          0.12       6.42 f
-  U5301/Y (NOR2BX2)                        0.22       6.63 f
-  U5300/Y (OA22X2)                         0.36       6.99 f
-  U6139/Y (OAI22X2)                        0.18       7.17 r
-  U19110/Y (OAI221X2)                      0.21       7.38 f
-  U19109/Y (AO22X4)                        0.31       7.69 f
-  U9827/Y (OAI2BB1X4)                      0.11       7.80 r
-  U4165/Y (NAND2BX4)                       0.33       8.13 r
-  U6128/Y (OAI222X2)                       0.23       8.36 f
-  U5325/Y (AOI221X1)                       0.33       8.69 r
-  U4078/Y (AOI2BB2X4)                      0.30       8.98 r
-  U6437/Y (BUFX12)                         0.29       9.28 r
-  U12357/Y (OAI21XL)                       0.23       9.50 f
-  U12457/Y (NOR4X1)                        0.37       9.87 r
-  U12456/Y (OAI2BB2XL)                     0.24      10.11 f
-  map_reg[6][6][4]/D (DFFXL)               0.00      10.11 f
-  data arrival time                                  10.11
-
-  clock clk (rise edge)                   10.00      10.00
-  clock network delay (ideal)              0.50      10.50
-  clock uncertainty                       -0.10      10.40
-  map_reg[6][6][4]/CK (DFFXL)              0.00      10.40 r
-  library setup time                      -0.29      10.11
-  data required time                                 10.11
-  -----------------------------------------------------------
-  data required time                                 10.11
-  data arrival time                                 -10.11
-  -----------------------------------------------------------
-  slack (MET)                                         0.01
+  slack (MET)                                         0.00
 
 
 1

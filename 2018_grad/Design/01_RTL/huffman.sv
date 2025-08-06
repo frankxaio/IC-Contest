@@ -650,7 +650,7 @@ module huffman (
       M5  <= '0;
       M6  <= '0;
     end else if (cs == SPLIT_C5 || cs == SPLIT_C4 ||
-                  cs == SPLIT_C3 || cs == SPLIT_C2 || cs == SPLIT_C1) begin
+    cs == SPLIT_C3 || cs == SPLIT_C2 || cs == SPLIT_C1) begin
       if (split_cnt > 0 && split_cnt < 6) begin
         case (comb_item_lr_flatten[split_cnt_r])
           A1: begin
@@ -790,7 +790,6 @@ module huffman (
   end
 
 endmodule
-
 
 /*
  * Initial synthesizable SystemVerilog module for selection-sort of 6 elements

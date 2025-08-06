@@ -1,0 +1,40 @@
+# =========================================================================== #
+#   Guides of dc_setup
+#   1. Modify this file to fit your own environment
+#   2. Copy this file from synopsys_dc.setup to .synopsys_dc.setup (Shade it)
+#      and put it in tool's invoking directory or your home directory.
+# =========================================================================== #
+
+set company "CIC"
+set designer "Student"
+
+# Check your db folders
+set search_path      "/cad/CBDK/CBDK_UMC018_ITRI_v0.8/CIC/SynopsysDC/db  $search_path"
+
+# Check your db files
+set_app_var target_library   "UDVS_u018mmwc162v.db UDVS_u018mmwc054v.db UDVS_u018mmwc108v.db
+                        UDVS_u018mmbc198v.db UDVS_u018mmbc132v.db UDVS_u018mmbc066v.db
+                        UDVS_u018mmtc18v.db UDVS_u018mmtc06v.db UDVS_u018mmtc12v.db"
+
+# 1.2v target library
+# set_app_var target_library   "UDVS_u018mmwc108v.db UDVS_u018mmtc12v.db UDVS_u018mmbc132v.db"
+
+
+# Check your corner files
+set_app_var link_library     "* $target_library dw_foundation.sldb"
+
+# DesignWare slow db file
+set_app_var synthetic_library "dw_foundation.sldb"
+
+set_app_var symbol_library "/usr/Synopsys/syn/T-2022.03-SP2/libraries/syn/generic.sdb"
+
+set hdlin_translate_off_skip_text "TRUE"
+set edifout_netlist_only "TRUE"
+set verilogout_no_tri true
+
+set sh_enable_line_editing true
+set sh_line_editing_mode emacs
+history keep 100
+alias h history
+
+
