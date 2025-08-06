@@ -436,6 +436,11 @@ comb_item_C1.symbol <= '{default: '0};
 ```
 
 
+## Future Thinking
+
+- Huffman coding 
+- Sorting circuit
+
 ---
 
 *For detailed implementation questions, refer to the SystemVerilog source code in `Design/01_RTL/huffman.sv`*
