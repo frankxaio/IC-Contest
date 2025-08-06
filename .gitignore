@@ -75,7 +75,14 @@ __pycache__/
 # --------------------------------------
 .vscode/
 .vscode/*
+.settings/
 *.code-workspace
+
+# --------------------------------------
+# Sigasi IDE files
+# --------------------------------------
+.library_mapping.xml
+.project
 
 # --------------------------------------
 # Optional: Notes, drawings
