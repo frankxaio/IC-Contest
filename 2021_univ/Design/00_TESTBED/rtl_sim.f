@@ -1,0 +1,2 @@
+$ROOT_PATH/00_TESTBED/tb.sv
+$ROOT_PATH/01_RTL/geofence.sv

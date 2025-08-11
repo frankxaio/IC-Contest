@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "compilationGroups": [
+    {
+      "language": "Verilog",
+      "library": "work",
+      "resources": [
+        {
+          "path": "/home/host/Documents/IC-Contest/2021_grad/Design/00_TESTBED/tb.sv",
+          "hdlVersion": "SystemVerilog",
+          "kind": "COMPILE_FILE"
+        },
+        {
+          "path": "/home/host/Documents/IC-Contest/2021_grad/Design/01_RTL/geofence.sv",
+          "hdlVersion": "SystemVerilog",
+          "kind": "COMPILE_FILE"
+        },
+        {
+          "path": "/home/host/Documents/IC-Contest/2021_grad/Design/02_SYN/Netlist/geofence_syn.v",
+          "hdlVersion": "Verilog",
+          "kind": "COMPILE_FILE"
+        }
+      ],
+      "overrideDirectives": {},
+      "undefineMacroNames": [],
+      "includePaths": [],
+      "libraryResourcesConfig": {
+        "libraryFolderMatchConfigs": [],
+        "searchStrategy": "DEFAULT"
+      },
+      "currentWorkingDirectory": "/home/host/Documents/IC-Contest/2021_grad",
+      "inferOrder": true,
+      "inferLibrary": false,
+      "allowUndefineInitialDefine": false,
+      "allowUndefineAllInitialDefine": false,
+      "conditionalVariables": {}
+    }
+  ]
+}

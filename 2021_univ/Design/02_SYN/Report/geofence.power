@@ -1,0 +1,62 @@
+Loading db file '/cad/CBDK/CBDK_IC_Contest_v2.5/SynopsysDC/db/slow.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : geofence
+Version: T-2022.03-SP2
+Date   : Mon Aug 11 17:13:40 2025
+****************************************
+
+
+Library(s) Used:
+
+    slow (File: /cad/CBDK/CBDK_IC_Contest_v2.5/SynopsysDC/db/slow.db)
+
+
+Operating Conditions: slow   Library: slow
+Wire Load Model Mode: top
+
+Design        Wire Load Model            Library
+------------------------------------------------
+geofence               tsmc13_wl10       slow
+
+
+Global Operating Voltage = 1.08 
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+Attributes
+----------
+i - Including register clock pin internal power
+
+
+  Cell Internal Power  = 255.2858 uW   (84%)
+  Net Switching Power  =  48.2615 uW   (16%)
+                         ---------
+Total Dynamic Power    = 303.5472 uW  (100%)
+
+Cell Leakage Power     =  18.8075 uW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.2429            0.0000            0.0000            0.0000  (   0.00%)  i
+register       3.4612e-03        6.2483e-03        8.7088e+06            0.2613  (  81.06%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  8.9330e-03        4.2013e-02        1.0099e+07        6.1045e-02  (  18.94%)
+--------------------------------------------------------------------------------------------------
+Total              0.2553 mW     4.8261e-02 mW     1.8808e+07 pW         0.3224 mW
+1

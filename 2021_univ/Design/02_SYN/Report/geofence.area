@@ -1,0 +1,48 @@
+ 
+****************************************
+Report : area
+Design : geofence
+Version: T-2022.03-SP2
+Date   : Mon Aug 11 17:13:40 2025
+****************************************
+
+Library(s) Used:
+
+    slow (File: /cad/CBDK/CBDK_IC_Contest_v2.5/SynopsysDC/db/slow.db)
+
+Number of ports:                          276
+Number of nets:                          2406
+Number of cells:                         1973
+Number of combinational cells:           1531
+Number of sequential cells:               434
+Number of macros/black boxes:               0
+Number of buf/inv:                        393
+Number of references:                      69
+
+Combinational area:              14748.708671
+Buf/Inv area:                     1609.135178
+Noncombinational area:           11433.686504
+Macro/Black Box area:                0.000000
+Net Interconnect area:          255781.303284
+
+Total cell area:                 26182.395176
+Total area:                     281963.698459
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area            Local cell area
+                                  -------------------  ------------------------------ 
+Hierarchical cell                 Absolute    Percent  Combi-      Noncombi-   Black-
+                                  Total       Total    national    national    boxes   Design
+--------------------------------  ----------  -------  ----------  ----------  ------  ------------------------------------------
+geofence                          26182.3952    100.0   8408.9196   8914.7449  0.0000  geofence
+sub_74_C179                         363.2436      1.4    363.2436      0.0000  0.0000  geofence_DW01_sub_1
+sub_75_C179                         363.2436      1.4    363.2436      0.0000  0.0000  geofence_DW01_sub_0
+u_cross_product                    8132.2434     31.1   1145.7450   2518.9416  0.0000  cross_product_module
+u_cross_product/mult_575_C627      3664.6866     14.0   3664.6866      0.0000  0.0000  cross_product_module_DW_mult_tc_0
+u_cross_product/sub_649_S2          802.8702      3.1    802.8702      0.0000  0.0000  cross_product_module_DW01_sub_0_DW01_sub_2
+--------------------------------  ----------  -------  ----------  ----------  ------  ------------------------------------------
+Total                                                  14748.7087  11433.6865  0.0000
+
+1

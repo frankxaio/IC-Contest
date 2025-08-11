@@ -1,0 +1,11 @@
+{
+    "name": "2021_grad",
+    "targets": {
+        // define targets
+        "hdl": {
+            "libraryMapping": {
+                "": "work"
+            }
+        }
+    }
+}

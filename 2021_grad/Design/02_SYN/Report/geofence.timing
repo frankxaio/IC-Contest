@@ -1,0 +1,159 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 3
+Design : geofence
+Version: T-2022.03-SP2
+Date   : Thu Aug  7 17:58:42 2025
+****************************************
+
+Operating Conditions: slow   Library: slow
+Wire Load Model Mode: top
+
+  Startpoint: vector_B_reg[y][1]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: is_inside (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  geofence           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  vector_B_reg[y][1]/CK (DFFQX2)                          0.00       0.50 r
+  vector_B_reg[y][1]/Q (DFFQX2)                           0.73       1.23 r
+  mult_149_4/a[1] (geofence_DW_mult_tc_9)                 0.00       1.23 r
+  mult_149_4/U266/Y (XNOR2XL)                             0.61       1.84 r
+  mult_149_4/U283/Y (CLKBUFX3)                            0.63       2.47 r
+  mult_149_4/U285/Y (NAND2X1)                             0.22       2.69 f
+  mult_149_4/U284/Y (CLKBUFX3)                            0.59       3.28 f
+  mult_149_4/U334/Y (OAI22XL)                             0.54       3.82 r
+  mult_149_4/U59/S (ADDHXL)                               0.53       4.35 r
+  mult_149_4/U22/CO (ADDFXL)                              0.86       5.21 r
+  mult_149_4/U21/S (ADDFXL)                               0.62       5.83 r
+  mult_149_4/product[4] (geofence_DW_mult_tc_9)           0.00       5.83 r
+  sub_149_2/B[4] (geofence_DW01_sub_6)                    0.00       5.83 r
+  sub_149_2/U17/Y (CLKINVX1)                              0.18       6.01 f
+  sub_149_2/U2_4/CO (ADDFXL)                              0.74       6.75 f
+  sub_149_2/U2_5/CO (ADDFXL)                              0.53       7.28 f
+  sub_149_2/U2_6/CO (ADDFXL)                              0.53       7.81 f
+  sub_149_2/U2_7/CO (ADDFXL)                              0.53       8.34 f
+  sub_149_2/U2_8/CO (ADDFXL)                              0.53       8.86 f
+  sub_149_2/U2_9/CO (ADDFXL)                              0.53       9.39 f
+  sub_149_2/U2_10/CO (ADDFXL)                             0.53       9.92 f
+  sub_149_2/U2_11/CO (ADDFXL)                             0.53      10.44 f
+  sub_149_2/U2_12/CO (ADDFXL)                             0.53      10.97 f
+  sub_149_2/U2_13/CO (ADDFXL)                             0.53      11.50 f
+  sub_149_2/U2_14/CO (ADDFXL)                             0.53      12.03 f
+  sub_149_2/U2_15/CO (ADDFXL)                             0.53      12.55 f
+  sub_149_2/U2_16/CO (ADDFXL)                             0.53      13.08 f
+  sub_149_2/U2_17/CO (ADDFXL)                             0.53      13.61 f
+  sub_149_2/U2_18/CO (ADDFXL)                             0.53      14.14 f
+  sub_149_2/U2_19/CO (ADDFXL)                             0.53      14.66 f
+  sub_149_2/U2_20/CO (ADDFXL)                             0.53      15.19 f
+  sub_149_2/U2_21/S (ADDFXL)                              0.56      15.76 r
+  sub_149_2/DIFF[21] (geofence_DW01_sub_6)                0.00      15.76 r
+  add_3_root_add_149_4/B[21] (geofence_DW01_add_3)        0.00      15.76 r
+  add_3_root_add_149_4/U1_21/CO (ADDFXL)                  0.86      16.62 r
+  add_3_root_add_149_4/U1_22/CO (ADDFXL)                  0.50      17.12 r
+  add_3_root_add_149_4/U1_23/Y (XOR3X1)                   0.66      17.78 r
+  add_3_root_add_149_4/SUM[23] (geofence_DW01_add_3)      0.00      17.78 r
+  add_1_root_add_149_4/B[23] (geofence_DW01_add_1)        0.00      17.78 r
+  add_1_root_add_149_4/U1_23/CO (ADDFXL)                  0.89      18.67 r
+  add_1_root_add_149_4/U1_24/S (ADDFXL)                   0.62      19.29 r
+  add_1_root_add_149_4/SUM[24] (geofence_DW01_add_1)      0.00      19.29 r
+  add_0_root_add_149_4/B[24] (geofence_DW01_add_0)        0.00      19.29 r
+  add_0_root_add_149_4/U1_24/CO (ADDFXL)                  0.86      20.15 r
+  add_0_root_add_149_4/U1_25/CO (ADDFXL)                  0.50      20.65 r
+  add_0_root_add_149_4/U1_26/Y (XOR3X1)                   0.43      21.08 f
+  add_0_root_add_149_4/SUM[26] (geofence_DW01_add_0)      0.00      21.08 f
+  U476/Y (OA22X1)                                         0.64      21.72 f
+  U477/Y (INVX12)                                         0.69      22.41 r
+  is_inside (out)                                         0.00      22.41 r
+  data arrival time                                                 22.41
+
+  clock clk (fall edge)                                  25.00      25.00
+  clock network delay (ideal)                             0.50      25.50
+  clock uncertainty                                      -0.10      25.40
+  output external delay                                   0.00      25.40
+  data required time                                                25.40
+  --------------------------------------------------------------------------
+  data required time                                                25.40
+  data arrival time                                                -22.41
+  --------------------------------------------------------------------------
+  slack (MET)                                                        2.99
+
+
+  Startpoint: cs_reg[0] (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: valid (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  geofence           tsmc13_wl10           slow
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  cs_reg[0]/CK (DFFSX1)                    0.00       0.50 r
+  cs_reg[0]/QN (DFFSX1)                    0.49       0.99 f
+  U478/Y (OR2X1)                           0.47       1.46 f
+  U479/Y (INVX12)                          0.67       2.13 r
+  valid (out)                              0.00       2.13 r
+  data arrival time                                   2.13
+
+  clock clk (fall edge)                   25.00      25.00
+  clock network delay (ideal)              0.50      25.50
+  clock uncertainty                       -0.10      25.40
+  output external delay                    0.00      25.40
+  data required time                                 25.40
+  -----------------------------------------------------------
+  data required time                                 25.40
+  data arrival time                                  -2.13
+  -----------------------------------------------------------
+  slack (MET)                                        23.27
+
+
+  Startpoint: X[0] (input port clocked by clk)
+  Endpoint: point_2_reg[x][0]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  geofence           tsmc13_wl10           slow
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (fall edge)                   25.00      25.00
+  clock network delay (ideal)              0.50      25.50
+  input external delay                     0.00      25.50 r
+  X[0] (in)                                0.00      25.50 r
+  U491/Y (CLKINVX1)                        0.42      25.92 f
+  U556/Y (OAI22XL)                         0.61      26.53 r
+  point_2_reg[x][0]/D (DFFX1)              0.00      26.53 r
+  data arrival time                                  26.53
+
+  clock clk (rise edge)                   50.00      50.00
+  clock network delay (ideal)              0.50      50.50
+  clock uncertainty                       -0.10      50.40
+  point_2_reg[x][0]/CK (DFFX1)             0.00      50.40 r
+  library setup time                      -0.16      50.24
+  data required time                                 50.24
+  -----------------------------------------------------------
+  data required time                                 50.24
+  data arrival time                                 -26.53
+  -----------------------------------------------------------
+  slack (MET)                                        23.71
+
+
+1

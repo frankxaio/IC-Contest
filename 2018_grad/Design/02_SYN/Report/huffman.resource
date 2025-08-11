@@ -3,7 +3,7 @@
 Report : resources
 Design : huffman
 Version: T-2022.03-SP2
-Date   : Tue Aug  5 12:40:08 2025
+Date   : Wed Aug  6 17:13:58 2025
 ****************************************
 
 Resource Sharing Report for design huffman in file
