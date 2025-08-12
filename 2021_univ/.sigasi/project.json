@@ -44,11 +44,6 @@
       "type": 2
     },
     {
-      "source": "platform:/resource/2021_grad/Targets/hdl/geofence.v",
-      "target": "file:///home/host/Documents/IC-Contest/2021_univ/2021_univ_cell/geofence.v",
-      "type": 1
-    },
-    {
       "source": "platform:/resource/2021_grad/Targets/hdl/tb.sv",
       "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/00_TESTBED/tb.sv",
       "type": 1
@@ -115,11 +110,6 @@
     ],
     "platform:/resource/2021_grad/Targets/hdl": [
       {
-        "source": "platform:/resource/2021_grad/Targets/hdl/geofence.v",
-        "target": "file:///home/host/Documents/IC-Contest/2021_univ/2021_univ_cell/geofence.v",
-        "type": 1
-      },
-      {
         "source": "platform:/resource/2021_grad/Targets/hdl/tb.sv",
         "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/00_TESTBED/tb.sv",
         "type": 1
@@ -140,11 +130,6 @@
     "platform:/resource/2021_grad/Targets/hdl": {
       "library": "work",
       "version": null,
-      "isLibraryFile": false
-    },
-    "platform:/resource/2021_grad/Targets/hdl/geofence.v": {
-      "library": "work",
-      "version": "Verilog",
       "isLibraryFile": false
     },
     "platform:/resource/2021_grad/Targets/hdl/tb.sv": {
@@ -192,7 +177,6 @@
           "fileUri": "file:///home/host/Documents/IC-Contest/2021_univ/"
         },
         "resources": [
-          "platform:/resource/2021_grad/Targets/hdl/geofence.v",
           "platform:/resource/2021_grad/Targets/hdl/tb.sv",
           "platform:/resource/2021_grad/Targets/hdl/geofence.sv",
           "platform:/resource/2021_grad/Targets/hdl/geofence_syn.v"

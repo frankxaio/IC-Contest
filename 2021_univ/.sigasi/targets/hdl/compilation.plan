@@ -6,11 +6,6 @@
       "library": "work",
       "resources": [
         {
-          "path": "/home/host/Documents/IC-Contest/2021_univ/2021_univ_cell/geofence.v",
-          "hdlVersion": "Verilog",
-          "kind": "COMPILE_FILE"
-        },
-        {
           "path": "/home/host/Documents/IC-Contest/2021_univ/Design/00_TESTBED/tb.sv",
           "hdlVersion": "SystemVerilog",
           "kind": "COMPILE_FILE"
