@@ -3,46 +3,52 @@
 Report : area
 Design : geofence
 Version: T-2022.03-SP2
-Date   : Mon Aug 11 17:13:40 2025
+Date   : Tue Aug 12 16:09:48 2025
 ****************************************
 
 Library(s) Used:
 
     slow (File: /cad/CBDK/CBDK_IC_Contest_v2.5/SynopsysDC/db/slow.db)
 
-Number of ports:                          276
-Number of nets:                          2406
-Number of cells:                         1973
-Number of combinational cells:           1531
-Number of sequential cells:               434
+Number of ports:                          446
+Number of nets:                          2300
+Number of cells:                         1738
+Number of combinational cells:           1479
+Number of sequential cells:               238
 Number of macros/black boxes:               0
-Number of buf/inv:                        393
-Number of references:                      69
+Number of buf/inv:                        423
+Number of references:                      74
 
-Combinational area:              14748.708671
-Buf/Inv area:                     1609.135178
-Noncombinational area:           11433.686504
+Combinational area:              15101.767911
+Buf/Inv area:                     1712.676580
+Noncombinational area:            6219.273657
 Macro/Black Box area:                0.000000
-Net Interconnect area:          255781.303284
+Net Interconnect area:          217141.097351
 
-Total cell area:                 26182.395176
-Total area:                     281963.698459
+Total cell area:                 21321.041568
+Total area:                     238462.138919
 
 Hierarchical area distribution
 ------------------------------
 
                                   Global cell area            Local cell area
-                                  -------------------  ------------------------------ 
-Hierarchical cell                 Absolute    Percent  Combi-      Noncombi-   Black-
-                                  Total       Total    national    national    boxes   Design
---------------------------------  ----------  -------  ----------  ----------  ------  ------------------------------------------
-geofence                          26182.3952    100.0   8408.9196   8914.7449  0.0000  geofence
-sub_74_C179                         363.2436      1.4    363.2436      0.0000  0.0000  geofence_DW01_sub_1
-sub_75_C179                         363.2436      1.4    363.2436      0.0000  0.0000  geofence_DW01_sub_0
-u_cross_product                    8132.2434     31.1   1145.7450   2518.9416  0.0000  cross_product_module
-u_cross_product/mult_575_C627      3664.6866     14.0   3664.6866      0.0000  0.0000  cross_product_module_DW_mult_tc_0
-u_cross_product/sub_649_S2          802.8702      3.1    802.8702      0.0000  0.0000  cross_product_module_DW01_sub_0_DW01_sub_2
---------------------------------  ----------  -------  ----------  ----------  ------  ------------------------------------------
-Total                                                  14748.7087  11433.6865  0.0000
+                                  -------------------  ----------------------------- 
+Hierarchical cell                 Absolute    Percent  Combi-      Noncombi-  Black-
+                                  Total       Total    national    national   boxes   Design
+--------------------------------  ----------  -------  ----------  ---------  ------  ---------------------------------
+geofence                          21321.0416    100.0   6670.7820  5002.2378  0.0000  geofence
+sub_74_C176                         363.2436      1.7    363.2436     0.0000  0.0000  geofence_DW01_sub_7
+sub_74_C177                         363.2436      1.7    363.2436     0.0000  0.0000  geofence_DW01_sub_5
+sub_74_C178                         363.2436      1.7    363.2436     0.0000  0.0000  geofence_DW01_sub_3
+sub_74_C179                         509.2200      2.4    509.2200     0.0000  0.0000  geofence_DW01_sub_1
+sub_75_C176                         363.2436      1.7    363.2436     0.0000  0.0000  geofence_DW01_sub_6
+sub_75_C177                         363.2436      1.7    363.2436     0.0000  0.0000  geofence_DW01_sub_4
+sub_75_C178                         363.2436      1.7    363.2436     0.0000  0.0000  geofence_DW01_sub_2
+sub_75_C179                         475.2720      2.2    475.2720     0.0000  0.0000  geofence_DW01_sub_0
+u_cross_product                    6484.0680     30.4    904.7142  1217.0358  0.0000  cross_product_module
+u_cross_product/gt_821              504.1278      2.4    504.1278     0.0000  0.0000  cross_product_module_DW_cmp_0
+u_cross_product/mult_753_C802      3858.1902     18.1   3858.1902     0.0000  0.0000  cross_product_module_DW_mult_tc_0
+--------------------------------  ----------  -------  ----------  ---------  ------  ---------------------------------
+Total                                                  15101.7679  6219.2737  0.0000
 
 1

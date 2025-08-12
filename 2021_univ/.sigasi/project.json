@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "2021_grad",
-  "projectBaseDir": "file:///home/host/Documents/IC-Contest/2021_grad",
+  "projectBaseDir": "file:///home/host/Documents/IC-Contest/2021_univ",
   "linkedResources": [
     {
       "source": "platform:/resource/2021_grad",
@@ -30,7 +30,7 @@
     },
     {
       "source": "platform:/resource/2021_grad/Design",
-      "target": "file:///home/host/Documents/IC-Contest/2021_grad",
+      "target": "file:///home/host/Documents/IC-Contest/2021_univ",
       "type": 2
     },
     {
@@ -44,18 +44,23 @@
       "type": 2
     },
     {
+      "source": "platform:/resource/2021_grad/Targets/hdl/geofence.v",
+      "target": "file:///home/host/Documents/IC-Contest/2021_univ/2021_univ_cell/geofence.v",
+      "type": 1
+    },
+    {
       "source": "platform:/resource/2021_grad/Targets/hdl/tb.sv",
-      "target": "file:///home/host/Documents/IC-Contest/2021_grad/Design/00_TESTBED/tb.sv",
+      "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/00_TESTBED/tb.sv",
       "type": 1
     },
     {
       "source": "platform:/resource/2021_grad/Targets/hdl/geofence.sv",
-      "target": "file:///home/host/Documents/IC-Contest/2021_grad/Design/01_RTL/geofence.sv",
+      "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/01_RTL/geofence.sv",
       "type": 1
     },
     {
       "source": "platform:/resource/2021_grad/Targets/hdl/geofence_syn.v",
-      "target": "file:///home/host/Documents/IC-Contest/2021_grad/Design/02_SYN/Netlist/geofence_syn.v",
+      "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/02_SYN/Netlist/geofence_syn.v",
       "type": 1
     }
   ],
@@ -75,7 +80,7 @@
       },
       {
         "source": "platform:/resource/2021_grad/Design",
-        "target": "file:///home/host/Documents/IC-Contest/2021_grad",
+        "target": "file:///home/host/Documents/IC-Contest/2021_univ",
         "type": 2
       },
       {
@@ -110,18 +115,23 @@
     ],
     "platform:/resource/2021_grad/Targets/hdl": [
       {
+        "source": "platform:/resource/2021_grad/Targets/hdl/geofence.v",
+        "target": "file:///home/host/Documents/IC-Contest/2021_univ/2021_univ_cell/geofence.v",
+        "type": 1
+      },
+      {
         "source": "platform:/resource/2021_grad/Targets/hdl/tb.sv",
-        "target": "file:///home/host/Documents/IC-Contest/2021_grad/Design/00_TESTBED/tb.sv",
+        "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/00_TESTBED/tb.sv",
         "type": 1
       },
       {
         "source": "platform:/resource/2021_grad/Targets/hdl/geofence.sv",
-        "target": "file:///home/host/Documents/IC-Contest/2021_grad/Design/01_RTL/geofence.sv",
+        "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/01_RTL/geofence.sv",
         "type": 1
       },
       {
         "source": "platform:/resource/2021_grad/Targets/hdl/geofence_syn.v",
-        "target": "file:///home/host/Documents/IC-Contest/2021_grad/Design/02_SYN/Netlist/geofence_syn.v",
+        "target": "file:///home/host/Documents/IC-Contest/2021_univ/Design/02_SYN/Netlist/geofence_syn.v",
         "type": 1
       }
     ]
@@ -130,6 +140,11 @@
     "platform:/resource/2021_grad/Targets/hdl": {
       "library": "work",
       "version": null,
+      "isLibraryFile": false
+    },
+    "platform:/resource/2021_grad/Targets/hdl/geofence.v": {
+      "library": "work",
+      "version": "Verilog",
       "isLibraryFile": false
     },
     "platform:/resource/2021_grad/Targets/hdl/tb.sv": {
@@ -174,9 +189,10 @@
         "language": "Verilog",
         "currentWorkingDirectory": {
           "platformUri": "platform:/resource/2021_grad/Design/",
-          "fileUri": "file:///home/host/Documents/IC-Contest/2021_grad/"
+          "fileUri": "file:///home/host/Documents/IC-Contest/2021_univ/"
         },
         "resources": [
+          "platform:/resource/2021_grad/Targets/hdl/geofence.v",
           "platform:/resource/2021_grad/Targets/hdl/tb.sv",
           "platform:/resource/2021_grad/Targets/hdl/geofence.sv",
           "platform:/resource/2021_grad/Targets/hdl/geofence_syn.v"

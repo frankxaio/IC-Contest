@@ -55,7 +55,7 @@ module geofence (
   // ===============================================
   logic        [ 3:0] input_list_cnt;
   logic        [ 2:0] cclockwise     [6];  // counter clockwise list
-  logic signed [21:0] cross_product, cross_product_r;
+  logic cross_product, cross_product_r;
 
   // Cross product module signals
   logic signed [10:0] cross_vector_a_x, cross_vector_a_y;
@@ -83,7 +83,7 @@ module geofence (
   // input_list_cnt
   always_ff @(posedge clk or posedge reset) begin
     if (reset) input_list_cnt <= 0;
-    else if (cs == INPUT) input_list_cnt <= (input_list_cnt == 'd7) ? 0 : input_list_cnt + 1;
+    else if (cs == INPUT) input_list_cnt <= (input_list_cnt == 'd5) ? 0 : input_list_cnt + 1;
     else if (cs == CHECK_LIST) input_list_cnt <= (input_list_cnt == 'd9) ? 0 : input_list_cnt + 1;
     else if (cs == CHECK_CROSS) input_list_cnt <= (input_list_cnt == 'd5) ? 0 : input_list_cnt + 1;
   end
@@ -99,7 +99,6 @@ module geofence (
         'd3:     point_3 <= '{x: X, y: Y};
         'd4:     point_4 <= '{x: X, y: Y};
         'd5:     point_5 <= '{x: X, y: Y};
-        'd6:     point_6 <= '{x: X, y: Y};
         default: ;  // do nothing
       endcase
     end
@@ -117,9 +116,6 @@ module geofence (
       case (input_list_cnt)
         'd3:     point_cal_vec2 = point_2;
         'd4:     point_cal_vec2 = point_3;
-        'd5:     point_cal_vec2 = point_4;
-        'd6:     point_cal_vec2 = point_5;
-        'd7:     point_cal_vec2 = point_6;
         default: ;  // do nothing
       endcase
     end else if (cs == CAL_VEC_A) begin
@@ -129,7 +125,7 @@ module geofence (
         'd3:     point_cal_vec2 = point_3;
         'd4:     point_cal_vec2 = point_4;
         'd5:     point_cal_vec2 = point_5;
-        'd6:     point_cal_vec2 = point_6;
+        'd6:     point_cal_vec2 = {x: X, y: Y};
         default: ;  // do nothing
       endcase
     end else if (cs == CAL_VEC_B) begin
@@ -140,7 +136,7 @@ module geofence (
           'd3:     point_cal_vec2 = point_3;
           'd4:     point_cal_vec2 = point_4;
           'd5:     point_cal_vec2 = point_5;
-          'd6:     point_cal_vec2 = point_6;
+          'd6:     point_cal_vec2 = {x: X, y: Y};
         endcase
       end else begin
         case (cclockwise[input_list_cnt+'d1])
@@ -149,7 +145,7 @@ module geofence (
           'd3:     point_cal_vec2 = point_3;
           'd4:     point_cal_vec2 = point_4;
           'd5:     point_cal_vec2 = point_5;
-          'd6:     point_cal_vec2 = point_6;
+          'd6:     point_cal_vec2 = {x: X, y: Y};
         endcase
       end
     end
@@ -169,14 +165,18 @@ module geofence (
         'd3:     point_cal_vec1 = point_3;
         'd4:     point_cal_vec1 = point_4;
         'd5:     point_cal_vec1 = point_5;
-        'd6:     point_cal_vec1 = point_6;
+        'd6:     point_cal_vec1 = {x: X, y: Y};
         default: ;  // do nothing
       endcase
     end
   end
 
   // vector_tmp
+  assign point_6 = '{x: X, y: Y};
   assign vector_tmp = cal_vector(point_cal_vec1, point_cal_vec2);
+  assign vector_C = cal_vector(point_1, point_4);
+  assign vector_D = cal_vector(point_1, point_5);
+  assign vector_E = cal_vector(point_1, point_6);
 
   // vector_t
   always_ff @(posedge clk) begin
@@ -184,20 +184,11 @@ module geofence (
       case (input_list_cnt)
         'd3: vector_A <= vector_tmp;
         'd4: vector_B <= vector_tmp;
-        'd5: vector_C <= vector_tmp;
-        'd6: vector_D <= vector_tmp;
-        'd7: vector_E <= vector_tmp;
       endcase
     end else if (cs == CAL_VEC_A) begin
       vector_A <= vector_tmp;
     end else if (cs == CAL_VEC_B) begin
       vector_B <= vector_tmp;
-    end else begin
-      vector_A <= vector_A;
-      vector_B <= vector_B;
-      vector_C <= vector_C;
-      vector_D <= vector_D;
-      vector_E <= vector_E;
     end
   end
 
@@ -206,203 +197,397 @@ module geofence (
   // ===============================================
 
   // Cross product input vector selection
-  always_ff @(posedge clk) begin
-    if (cs == CROSS && (!list_done)) begin
+
+  always_comb begin
+    if (!list_done) begin
       case (input_list_cnt)
         'd0: begin
-          cross_vector_a_x <= vector_B.x;
-          cross_vector_a_y <= vector_B.y;
-          cross_vector_b_x <= vector_A.x;
-          cross_vector_b_y <= vector_A.y;
+          cross_vector_a_x = vector_B.x;
+          cross_vector_a_y = vector_B.y;
+          cross_vector_b_x = vector_A.x;
+          cross_vector_b_y = vector_A.y;
         end
         // ================================= cclockwise = {1 , o, o, o}
         'd1: begin
-          cross_vector_a_x <= vector_C.x;
-          cross_vector_a_y <= vector_C.y;
+          cross_vector_a_x = vector_C.x;
+          cross_vector_a_y = vector_C.y;
           case (cclockwise[2])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         'd2: begin
-          cross_vector_a_x <= vector_C.x;
-          cross_vector_a_y <= vector_C.y;
+          cross_vector_a_x = vector_C.x;
+          cross_vector_a_y = vector_C.y;
           case (cclockwise[1])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         // ================================= cclockwise = {1 , o, o, o, o}
         'd3: begin
-          cross_vector_a_x <= vector_D.x;
-          cross_vector_a_y <= vector_D.y;
+          cross_vector_a_x = vector_D.x;
+          cross_vector_a_y = vector_D.y;
           case (cclockwise[3])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         'd4: begin
-          cross_vector_a_x <= vector_D.x;
-          cross_vector_a_y <= vector_D.y;
+          cross_vector_a_x = vector_D.x;
+          cross_vector_a_y = vector_D.y;
           case (cclockwise[2])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         'd5: begin
-          cross_vector_a_x <= vector_D.x;
-          cross_vector_a_y <= vector_D.y;
+          cross_vector_a_x = vector_D.x;
+          cross_vector_a_y = vector_D.y;
           case (cclockwise[1])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         // ================================= cclockwise = {1 , o, o, o, o, o}
         'd6: begin
-          cross_vector_a_x <= vector_E.x;
-          cross_vector_a_y <= vector_E.y;
+          cross_vector_a_x = vector_E.x;
+          cross_vector_a_y = vector_E.y;
           case (cclockwise[4])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
             end
             5: begin
-              cross_vector_b_x <= vector_D.x;
-              cross_vector_b_y <= vector_D.y;
+              cross_vector_b_x = vector_D.x;
+              cross_vector_b_y = vector_D.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         'd7: begin
-          cross_vector_a_x <= vector_E.x;
-          cross_vector_a_y <= vector_E.y;
+          cross_vector_a_x = vector_E.x;
+          cross_vector_a_y = vector_E.y;
           case (cclockwise[3])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
             end
             5: begin
-              cross_vector_b_x <= vector_D.x;
-              cross_vector_b_y <= vector_D.y;
+              cross_vector_b_x = vector_D.x;
+              cross_vector_b_y = vector_D.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         'd8: begin
-          cross_vector_a_x <= vector_E.x;
-          cross_vector_a_y <= vector_E.y;
+          cross_vector_a_x = vector_E.x;
+          cross_vector_a_y = vector_E.y;
           case (cclockwise[2])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
             end
             5: begin
-              cross_vector_b_x <= vector_D.x;
-              cross_vector_b_y <= vector_D.y;
+              cross_vector_b_x = vector_D.x;
+              cross_vector_b_y = vector_D.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
         'd9: begin
-          cross_vector_a_x <= vector_E.x;
-          cross_vector_a_y <= vector_E.y;
+          cross_vector_a_x = vector_E.x;
+          cross_vector_a_y = vector_E.y;
           case (cclockwise[1])
-            2: begin
-              cross_vector_b_x <= vector_A.x;
-              cross_vector_b_y <= vector_A.y;
-            end
             3: begin
-              cross_vector_b_x <= vector_B.x;
-              cross_vector_b_y <= vector_B.y;
+              cross_vector_b_x = vector_B.x;
+              cross_vector_b_y = vector_B.y;
             end
             4: begin
-              cross_vector_b_x <= vector_C.x;
-              cross_vector_b_y <= vector_C.y;
+              cross_vector_b_x = vector_C.x;
+              cross_vector_b_y = vector_C.y;
             end
             5: begin
-              cross_vector_b_x <= vector_D.x;
-              cross_vector_b_y <= vector_D.y;
+              cross_vector_b_x = vector_D.x;
+              cross_vector_b_y = vector_D.y;
+            end
+            default: begin
+              cross_vector_b_x = vector_A.x;
+              cross_vector_b_y = vector_A.y;
             end
           endcase
         end
-        // =================================
         default: begin
-          cross_vector_a_x <= cross_vector_a_x;
-          cross_vector_a_y <= cross_vector_a_y;
-          cross_vector_b_x <= cross_vector_b_x;
-          cross_vector_b_y <= cross_vector_b_y;
+          cross_vector_a_x = vector_A.x;
+          cross_vector_a_y = vector_A.y;
+          cross_vector_b_x = vector_B.x;
+          cross_vector_b_y = vector_B.y;
         end
       endcase
-    end else if (cs == CROSS && list_done) begin
-      cross_vector_a_x <= vector_A.x;
-      cross_vector_a_y <= vector_A.y;
-      cross_vector_b_x <= vector_B.x;
-      cross_vector_b_y <= vector_B.y;
+    end else begin
+      cross_vector_a_x = vector_A.x;
+      cross_vector_a_y = vector_A.y;
+      cross_vector_b_x = vector_B.x;
+      cross_vector_b_y = vector_B.y;
     end
   end
+
+
+
+  // always_ff @(posedge clk) begin
+  //   if (!list_done) begin
+  //     case (input_list_cnt)
+  //       'd0: begin
+  //         cross_vector_a_x <= vector_B.x;
+  //         cross_vector_a_y <= vector_B.y;
+  //         cross_vector_b_x <= vector_A.x;
+  //         cross_vector_b_y <= vector_A.y;
+  //       end
+  //       // ================================= cclockwise = {1 , o, o, o}
+  //       'd1: begin
+  //         cross_vector_a_x <= vector_C.x;
+  //         cross_vector_a_y <= vector_C.y;
+  //         case (cclockwise[2])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //         endcase
+  //       end
+  //       'd2: begin
+  //         cross_vector_a_x <= vector_C.x;
+  //         cross_vector_a_y <= vector_C.y;
+  //         case (cclockwise[1])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //         endcase
+  //       end
+  //       // ================================= cclockwise = {1 , o, o, o, o}
+  //       'd3: begin
+  //         cross_vector_a_x <= vector_D.x;
+  //         cross_vector_a_y <= vector_D.y;
+  //         case (cclockwise[3])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //         endcase
+  //       end
+  //       'd4: begin
+  //         cross_vector_a_x <= vector_D.x;
+  //         cross_vector_a_y <= vector_D.y;
+  //         case (cclockwise[2])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //         endcase
+  //       end
+  //       'd5: begin
+  //         cross_vector_a_x <= vector_D.x;
+  //         cross_vector_a_y <= vector_D.y;
+  //         case (cclockwise[1])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //         endcase
+  //       end
+  //       // ================================= cclockwise = {1 , o, o, o, o, o}
+  //       'd6: begin
+  //         cross_vector_a_x <= vector_E.x;
+  //         cross_vector_a_y <= vector_E.y;
+  //         case (cclockwise[4])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //           5: begin
+  //             cross_vector_b_x <= vector_D.x;
+  //             cross_vector_b_y <= vector_D.y;
+  //           end
+  //         endcase
+  //       end
+  //       'd7: begin
+  //         cross_vector_a_x <= vector_E.x;
+  //         cross_vector_a_y <= vector_E.y;
+  //         case (cclockwise[3])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //           5: begin
+  //             cross_vector_b_x <= vector_D.x;
+  //             cross_vector_b_y <= vector_D.y;
+  //           end
+  //         endcase
+  //       end
+  //       'd8: begin
+  //         cross_vector_a_x <= vector_E.x;
+  //         cross_vector_a_y <= vector_E.y;
+  //         case (cclockwise[2])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //           5: begin
+  //             cross_vector_b_x <= vector_D.x;
+  //             cross_vector_b_y <= vector_D.y;
+  //           end
+  //         endcase
+  //       end
+  //       'd9: begin
+  //         cross_vector_a_x <= vector_E.x;
+  //         cross_vector_a_y <= vector_E.y;
+  //         case (cclockwise[1])
+  //           2: begin
+  //             cross_vector_b_x <= vector_A.x;
+  //             cross_vector_b_y <= vector_A.y;
+  //           end
+  //           3: begin
+  //             cross_vector_b_x <= vector_B.x;
+  //             cross_vector_b_y <= vector_B.y;
+  //           end
+  //           4: begin
+  //             cross_vector_b_x <= vector_C.x;
+  //             cross_vector_b_y <= vector_C.y;
+  //           end
+  //           5: begin
+  //             cross_vector_b_x <= vector_D.x;
+  //             cross_vector_b_y <= vector_D.y;
+  //           end
+  //         endcase
+  //       end
+  //       // =================================
+  //     endcase
+  //   end else begin
+  //     cross_vector_a_x <= vector_A.x;
+  //     cross_vector_a_y <= vector_A.y;
+  //     cross_vector_b_x <= vector_B.x;
+  //     cross_vector_b_y <= vector_B.y;
+  //   end
+  // end
 
   // Cross product input ready signal
   assign cross_input_ready = (cs == CROSS);
@@ -422,7 +607,7 @@ module geofence (
 
   // cross_product_r
   always_ff @(posedge clk) begin
-    if (list_done && input_list_cnt != 'd0 && cross_input_ready) cross_product_r <= cross_product;
+    if (input_list_cnt != 'd0 && cross_input_ready) cross_product_r <= cross_product;
   end
 
 
@@ -431,10 +616,9 @@ module geofence (
   // ===============================================
 
   // list
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) cclockwise <= '{1, 2, 3, 4, 5, 6};
-    else if (cs == IDLE) cclockwise <= '{1, 2, 3, 4, 5, 6};
-    else if (cs == SWAP && cross_product > 0) begin
+  always_ff @(posedge clk) begin
+    if (cs == INPUT) cclockwise <= '{1, 2, 3, 4, 5, 6};
+    else if (cs == SWAP && cross_product == 0) begin
       if (input_list_cnt == 0) begin
         cclockwise[1] <= cclockwise[2];
         cclockwise[2] <= cclockwise[1];
@@ -473,10 +657,9 @@ module geofence (
   end
 
   // list_done
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) list_done <= 1'b0;
+  always_ff @(posedge clk) begin
+    if (cs == INPUT) list_done <= 1'b0;
     else if (cs == LIST_DONE) list_done <= 1'b1;
-    else if (cs == IDLE) list_done <= 1'b0;
   end
 
   // ===============================================
@@ -493,7 +676,7 @@ module geofence (
   always_comb begin
     case (cs)
       IDLE:        ns = INPUT;
-      INPUT:       ns = (input_list_cnt == 'd7) ? LIST : INPUT;
+      INPUT:       ns = (input_list_cnt == 'd5) ? LIST : INPUT;
       LIST:        ns = CROSS;
       CROSS:       ns = WAIT_CROSS;
       WAIT_CROSS:  ns = (!cross_output_valid) ? WAIT_CROSS : (list_done) ? CHECK_CROSS : SWAP;
@@ -513,21 +696,18 @@ module geofence (
   // OUTPUT LOGIC
   // ===============================================
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) valid <= 1'b0;
+  always_ff @(posedge clk) begin
+    if (cs == IDLE) valid <= 1'b0;
     else if (cs == DONE) valid <= 1'b1;
-    else valid <= 1'b0;
   end
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) is_inside <= 1'b1;
-    else if (cs == IDLE) is_inside <= 1'b1;
+  always_ff @(posedge clk) begin
+    if (cs == INPUT) is_inside <= 1'b1;
     else if (cs == CHECK_CROSS && input_list_cnt != 'd0) begin 
-      if (cross_product == 'd0) is_inside <= 1'b0;
-      else if (cross_product_r > 'sd0 && cross_product < 'sd0) is_inside <= 1'b0;
-      else if (cross_product_r < 'sd0 && cross_product > 'sd0) is_inside <= 1'b0;
+      is_inside <= (cross_product_r != cross_product) ? 1'b0 : is_inside;
     end
   end
+
 
 
 
@@ -544,7 +724,7 @@ module cross_product_module (
   input  signed       [10:0] vector_b_x,
   input  signed       [10:0] vector_b_y,
   input                      input_ready,
-  output logic signed [21:0] cross_product,
+  output logic cross_product,
   output logic               output_valid
 );
 
@@ -553,13 +733,11 @@ module cross_product_module (
   // ===============================================
 
   typedef enum logic [3:0] {
-    IDLE       = 4'b0000,
-    MUL_1      = 4'b0001,
-    MUL_1_DONE = 4'b0010,
-    MUL_2      = 4'b0011,
-    MUL_2_DONE = 4'b0100,
-    CROSS_CAL  = 4'b0101,
-    DONE       = 4'b0110
+    IDLE       ,
+    MUL_1      ,
+    MUL_2      ,
+    CROSS_CAL  ,
+    DONE       
   } cross_state_t;
 
   cross_state_t cs, ns;
@@ -590,10 +768,8 @@ module cross_product_module (
   always_comb begin
     case (cs)
       IDLE:       ns = input_ready ? MUL_1 : IDLE;
-      MUL_1:      ns = MUL_1_DONE;
-      MUL_1_DONE: ns = MUL_2;
-      MUL_2:      ns = MUL_2_DONE;
-      MUL_2_DONE: ns = CROSS_CAL;
+      MUL_1:      ns = MUL_2;
+      MUL_2:      ns = CROSS_CAL;
       CROSS_CAL:  ns = DONE;
       DONE:       ns = IDLE;
       default:    ns = IDLE;
@@ -603,21 +779,20 @@ module cross_product_module (
   // ===============================================
   // MULTIPLICATION PIPELINE
   // ===============================================
-
-  // Multiplier inputs
-  always_ff @(posedge clk) begin
+  
+  always_comb begin
     case (cs)
       MUL_1: begin
-        mul_in1 <= vector_a_x;
-        mul_in2 <= vector_b_y;
+        mul_in1 = vector_a_x;
+        mul_in2 = vector_b_y;
       end
       MUL_2: begin
-        mul_in1 <= vector_a_y;
-        mul_in2 <= vector_b_x;
+        mul_in1 = vector_a_y;
+        mul_in2 = vector_b_x;
       end
       default: begin
-        mul_in1 <= 11'b0;
-        mul_in2 <= 11'b0;
+        mul_in1 = 11'b0;
+        mul_in2 = 11'b0;
       end
     endcase
   end
@@ -630,8 +805,8 @@ module cross_product_module (
   // Store multiplication results
   always_ff @(posedge clk) begin
     case (cs)
-      MUL_1_DONE: mul_res1 <= mul_res_tmp;  // Store A.x * B.y
-      MUL_2_DONE: mul_res2 <= mul_res_tmp;  // Store A.y * B.x
+      MUL_1: mul_res1 <= mul_res_tmp;  // Store A.x * B.y
+      MUL_2: mul_res2 <= mul_res_tmp;  // Store A.y * B.x
       default: begin
         mul_res1 <= mul_res1;
         mul_res2 <= mul_res2;
@@ -643,17 +818,8 @@ module cross_product_module (
   // OUTPUT LOGIC
   // ===============================================
 
-  // Cross product calculation: A.x * B.y - A.y * B.x
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) cross_product <= 22'b0;
-    else if (cs == CROSS_CAL) cross_product <= mul_res1 - mul_res2;
-    else cross_product <= cross_product;
-  end
+  assign cross_product = (mul_res1 > mul_res2) ? 1'b0 : 1'b1;
 
-  // Output valid signal
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset) output_valid <= 1'b0;
-    else output_valid <= (ns == DONE);
-  end
+  assign output_valid = (cs == DONE);
 
 endmodule
