@@ -83,6 +83,7 @@ __pycache__/
 # --------------------------------------
 .library_mapping.xml
 .project
+.sigasi/
 
 # --------------------------------------
 # Optional: Notes, drawings
